@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="nine columns">
+		<h3>FINANCIAMIENTO CIENTIFICO Y TECNOLOGICO</h3>
+		<hr/>
+		<%_.each(proyectos, function(p){%>
+			<div class="row">
+				<div class="twelve columns">
+					<p>Título: <b><%=p.get('titulo')%></b><br>
+						Tipo de proyecto: <b><%=p.get('tipo')%></b><br>
+						Participantes: <b><%=p.get('participantes')%></b><br>
+						Fecha desde: <b><%=p.get('desde')%></b> hasta: <b><%=p.get('hasta')%></b>
+					</p>
+				</div>
+			</div>
+		<%});%>
+	</div>
+	<div class="three columns">
+		<div class="lateral-menu">
+			<div class="row">
+				<div class="twelve columns">
+					<h3><%=title%></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="twelve columns inner-menu">
+					<%_.each(anios, function(a){%>
+					<a href="#/<%=title%>/<%=a.get('anio')%>">
+						<div class="panel">
+							<%=title%> <%=a.get('anio')%>
+						</div>
+					</a>
+					<%});%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

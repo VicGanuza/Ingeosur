@@ -1,0 +1,86 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#ei-slider').eislideshow({
+			animation     : 'center',
+			autoplay      : true,
+			slideshow_interval  : 3000,
+			titlesFactor    : 0
+		});
+	});
+</script>
+<div class="content">
+	<div id="ei-slider" class="ei-slider">
+	  <ul class="ei-slider-large">
+	  	<% _.each(fotos, function(f){%>
+			<li><img src="<%=f.get('url')%>/<%=f.get('nombre')%>" alt="Slider" class="responsiveslide"></li>
+		<%});%>
+	  </ul>
+	  <!-- slider-thumbs -->
+	  <ul class="ei-slider-thumbs">
+	    <li class="ei-slider-element">Current</li>
+	    <% _.each(fotos, function(f){%>
+			<li><a href="#"><%=f.get('nombre')%></a><img src="<%=f.get('url')%>/<%=f.get('nombre')%>" alt="Slider" class="responsiveslide" class="slideshowthumb" alt="<%=f.get('nombre')%>"></li>
+		<%});%>
+	  </ul>
+	</div>
+	<div class="row">
+		<div class="twelve columns">
+			<h3><%=title%></h3>
+			<hr>
+			<p>
+				El laboratorio de Petrotomía se ubica en dependencias del Departamento de Geología de la Universidad Nacional del Sur, ubicado en la calle San Juan 670 de Bahía Blanca. El mismo cuenta con equipos de última generación que permiten realizar preparados de rocas y minerales para estudios microscópicos y geoquímicos, brindando además servicio a entidades públicas y privadas.
+			</p>
+			<h6>Detalle de los trabajos que se realizan</h6>
+			<p>Los materiales que trabajamos incluyen rocas, minerales, fósiles, materiales de origen biológico, materiales de origen industrial, sedimentos, suelos, cutting.</p>
+			<ul class="circle">
+				<li>Cortes delgados (de 27 x 46 mm) petrográficos.</li>
+				<li>Cortes delgados pulidos (petro-calcográficos).</li>
+				<li>Cortes delgados bipulidos.</li>
+				<li>Cortes delgados coloreados para estudios de porosidad.</li>
+				<li>Pastillas calcográficas.</li>
+				<li>Cortes macroscópicos de rocas.</li>
+				<li>Montaje de granos sueltos.</li>
+				<li>Molienda de rocas.</li>
+				<li>Tamizados.</li>
+				<li>Separación mineral por densidad y magnetismo.</li>
+			</ul>
+			<p>Los productos del laboratorio son utilizados en estudios petrográficos, calcográficos y metalogenéticos, análisis químicos y geoquímicos, estudios texturales; de microsonda electrónica; estudios de porosidad en rocas sedimentarias y metamórficas de bajo grado; estudios de isótopos estables y fluorescencia de rayos x, estudios estructurales, dataciones, difractometría de rayos x y COT.</p>
+			<p>Contamos con una amplia variedad de insumos de óptima calidad de origen nacional e importado. Esto nos permite asegurar un producto de calidad que puede ser procesado en diferentes laboratorios del país y del mundo.</p>
+			<h6>EQUIPAMIENTO</h6>
+			Cortadora de rocas manual con disco diamantado de 10”.
+			<br/>Cortadora sensitiva con disco diamantado segmentado de 16”.
+			<br/>Separador magnetico Frantz.
+			<br/>1 columna vibradora Zonytest EJR 2000, movimiento tridimensional tipo rot-up y tamices #35, #60, #100, #140, #170, #200 y #230.
+			<br/>Chancadora fritsch pulverisette 1.
+			<br/>Molino Fritsch Pulverisette 13.
+			<br/>Mortero de laboratorio Fritsch Pulverisette 2.
+			<br/>Compresor tipo Thausen.
+			<br/>1 lámpara ultravioleta Philips.
+			<br/>2 microscopios petrograficos Enosa.
+			<br/>1 drybox-2 Struers.
+			<br/>1 plancha de calentamiento fac de 50x30 cm
+			<br/>1 cortadora Ward’s ingram thin section saw grinder modelo 65c y bomba de vacio modelo 400-1901 Barnant Company.
+			<br/>1 cortadora Struers discoplan –ts.
+			<br/>2 discos de pulido.
+			<br/>1 cámara de impregnación al vacío Epovac  Struers.
+			<br/>1 cámara de impregnación al vacio de 10”.
+			<br/>1 sistema de pulido Struers Rotopol-35.
+			<br/>1 pulidora Struers dp-u.
+			<br/>1 lavadora ultrasonica Testlab tb10-ta.
+			<br/>1 microscopio Ortholux Leitz Wetzlar.
+			<br/>1 microscopio petrográfico Leitz Wetzlar.
+			<br/>1 lupa binocular Bausch & Lomb.
+			<br/>1 etiquetadora Brother 1090.
+			<br/>1 grabador Dremel 290.
+			<br/>1 torno manual Dremel 300.
+			<h6>QUIENES TRABAJAN</h6>
+			<p>A partir del año 2006, el laboratorio cuenta con un Técnico Petrotomista, Heraclio Ortiz. En el 2008 se sumó la Licenciada María Soledad Melatini (Profesional Adjunto) y en el 2011 ingresó la Licenciada Ana Mercedes Cassano (Profesional Asistente), ambas pertenecientes a la Carrera del Personal de Apoyo a la Investigación del CONICET.</p>
+			<p>Este equipo de trabajo presta servicios a diferentes grupos de investigación (CONICET-CIC-AGENCIA-UNS- otras Universidades e Institutos dependientes de CONICET), docentes universitarios, empresas y particulares.</p>
+			<p>Para consultas de tarifas y tiempos estimados de entrega, envío de muestras y modalidad de trabajo y otros, contactarse a los siguientes correos electrónicos:</p>
+			<a class="blue" href="mailto:amcassano@ingeosur-conicet.gob.ar ">amcassano@ingeosur-conicet.gob.ar </a><br/>
+			<a class="blue" href="mailto:hoortiz@uns.edu.ar">hoortiz@uns.edu.ar</a><br/>
+			<a class="blue" href="mailto:smelatini@ingeosur-conicet.gob.ar">smelatini@ingeosur-conicet.gob.ar</a><br/>
+			<p>o al al teléfono 0291-4959101 - Interno 3058.</p>
+		</div>
+	</div>
+</div>

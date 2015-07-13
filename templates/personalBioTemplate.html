@@ -1,0 +1,38 @@
+<div class="content">
+	<%_.each(biografia, function(b){%>
+	<div class="row">
+		<div class="ten columns">
+			<h4><%= b.get('nombre')%></h4>
+			<div><%= b.get('cargo')%></div>
+			<div><%= b.get('adicional')%></div> 
+		</div>
+		<div class="two columns">
+			<%if ((b.get('imagen')==null) || (b.get('imagen')=="")) {%>
+				<img src="images/perfil/no_perfil.jpg">
+			<%}
+			else {%>
+				<img src="images/perfil/<%= b.get('imagen')%>">
+			<%}%>
+		</div>
+	</div>
+	<div class="row">
+		<div class="twelve columns">
+			<h4>Especialidad / Specialty</h4>
+			<p><%= b.get('especialidad')%></p>
+			<%if((b.get('specialty')!=null) || (b.get('specialty')!="")) {%>
+				<p><%= b.get('specialty')%></p>
+			<%}%>
+		</div>
+	</div>
+	<div class="row">
+		<div class="twelve columns">
+			<p>
+				<a class="icon icon-attach" href="pdf/<%=b.get('cv')%>" target="_blank">.</a><span>Curriculum Vitae</span>
+			</p>
+			<p>
+				<a class="icon icon-mail" href="mailto:<%=b.get('email')%>" target="_blank">.</a><span>Email</span>
+			</p>
+		</div>
+	</div>
+	<%});%>	
+</div>

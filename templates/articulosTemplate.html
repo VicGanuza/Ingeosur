@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="nine columns">
+		<%_.each(tipo, function(t){%>
+			<h3><%=t.get('tipo')%>
+				<%if (t.get('tipo')=='Articulos'){%>
+					<%=year%>
+				<%}%> 
+			</h3>
+			<hr/>
+			<%_.each(articulos, function(a){
+				if (t.get('tipo')==a.get('tipo')) {%>
+					<div class="row">
+						<div class="twelve columns">
+							<p><%=a.get('autores')%> <%=a.get('titulo')%> <%=a.get('lugar')%> </p>
+						</div>
+					</div>
+				<%}
+			});%>
+		<%});%>
+	</div>
+	<div class="three columns">
+		<div class="lateral-menu">
+			<div class="row">
+				<div class="twelve columns">
+					<h3><%=title%></h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="twelve columns inner-menu">
+					<%_.each(anios, function(a){%>
+					<a href="#/<%=title%>/<%=a.get('anio')%>">
+						<div class="panel">
+							<%=title%> <%=a.get('anio')%>
+						</div>
+					</a>
+					<%});%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

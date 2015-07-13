@@ -1,0 +1,88 @@
+<div>
+<div class="row">
+	<!-- CONTACT FORM -->
+	<div class="twelve columns">
+		<div class="wrapcontact">
+			<div class="done">
+				<div class="alert-box success">
+				 El mensaje ha sido enviado! <div class="close">x</div>
+				</div>
+			</div>			
+			<form enctype="multipart/form-data" class="datos">
+				<div class="form">
+					<div class="row">
+						<div class="six columns">
+							<label>Elige una opción:</label>
+							<select class="smoothborder">
+								<option>Personal</option>
+								<option>Articulos</option>
+								<option>Proyectos</option>
+								<option>Noticias</option>
+								<option>Imagenes</option>
+							</select>
+						</div>
+					</div>
+					<div id="add-personal">
+						<div class="row">
+							<div class="six columns">
+								<label>Tipo:</label>
+								<select class="smoothborder" name="tipo_personal">
+									<option value="investigadores-conicet">Investigadores CONICET</option>
+									<option value="investigadores-cic">Investigadores CIC</option>
+									<option value="investigadores-uns">Investigadores UNS</option>
+									<option value="becarios-conicet">Becarios CONICET</option>
+									<option value="profesionales-apoyo">Profesionales de Apoyo CONICET</option>
+								</select>
+								<label>Nombre completo</label>
+								<input type="text" name="nombre_personal" class="smoothborder">
+								<label>Apellido</label>
+								<input type="text" name="apellido_personal" class="smoothborder">
+								<label>Titulo</label>
+								<input type="text" name="titulo_personal" class="smoothborder">
+								<label>Cargo</label>
+								<input type="text" name="cargo_personal" class="smoothborder">
+								<label>Cargos Adicionales</label>
+								<input type="text" name="adicional_personal" class="smoothborder">
+							</div>
+						</div>
+						<div class="row">
+							<div class="six columns">
+								<label>Especialidad</label>
+								<textarea class="smoothborder" name="especialidad_personal" rows="10"></textarea>
+							</div>
+							<div class="six columns">
+								<label>Specialty</label>
+								<textarea class="smoothborder" name="specialty_personal" rows="10"></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="six columns">
+								<label>Email</label>
+								<input type="text" name="email_personal" class="smoothborder">
+								<label>Subir imagen:</label>
+								<input id="uploadImg" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+								<div class="fileUpload btn btn-primary">
+								    <span>Upload</span>
+								    <input id="archivo_img" name="archivo_img" type="file" class="uploadBtn upload"/>
+								</div>
+								<div class="messages messageImg"></div>
+								<label>Subir CV</label>
+								<input id="uploadPdf" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+								<div class="fileUpload btn btn-primary">
+								    <span>Upload</span>
+								    <input id="archivo_pdf" name="archivo_pdf" type="file" class="uploadBtn upload"/>
+								</div>
+								<div class="messages messagePdf"><span class="error">Debe ser un pdf</span></div>
+							</div>
+						</div>
+						<input type="button" class="btn btn-primary subir_personal" value="Subir">
+					</div>
+				</div>
+			</form>			
+		</div>
+	</div>
+												
+</div>
+<div class="hr">
+</div>
+</div>

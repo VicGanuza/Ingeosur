@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="twelve columns">
+		<h3><%=title%></h3>
+	</div>
+</div>
+<div class="content">
+	<%_.each(personal, function(a){%>
+	<div class="row">
+		<hr>
+		<div class="two columns">
+			<%if((a.get('imagen')==null) || (a.get('imagen')=="")){%>
+				<img src="images/perfil/no_perfil.jpg">
+			<%}
+			else {%>
+				<img src="images/perfil/<%= a.get('imagen')%>">
+			<%}%>
+		</div>
+		<a href="#/biografia/<%=a.get('id')%>" class="ten columns">
+			<h6><%= a.get('nombre') %></h6>
+	 		<div><%= a.get('cargo')%></div>
+			<div><%= a.get('adicional')%></div> 
+		</a>
+	</div>
+	<%});%>
+</div>
+

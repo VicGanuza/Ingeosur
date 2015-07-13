@@ -1,0 +1,45 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#ei-slider').eislideshow({
+			animation     : 'center',
+			autoplay      : true,
+			slideshow_interval  : 3000,
+			titlesFactor    : 0
+		});
+	});
+</script>
+<div class="content">
+	<div id="ei-slider" class="ei-slider">
+	  <ul class="ei-slider-large">
+	  	<% _.each(fotos, function(f){%>
+			<li><img src="<%=f.get('url')%>/<%=f.get('nombre')%>" alt="Slider" class="responsiveslide"></li>
+		<%});%>
+	  </ul>
+	  <!-- slider-thumbs -->
+	  <ul class="ei-slider-thumbs">
+	    <li class="ei-slider-element">Current</li>
+	    <% _.each(fotos, function(f){%>
+			<li><a href="#"><%=f.get('nombre')%></a><img src="<%=f.get('url')%>/<%=f.get('nombre')%>" alt="Slider" class="responsiveslide" class="slideshowthumb" alt="<%=f.get('nombre')%>"></li>
+		<%});%>
+	  </ul>
+	</div>
+	<div class="row">
+		<div class="twelve columns">
+			<h3><%=title%></h3>
+			<hr>
+			<%_.each(pali, function(p){%>
+				<p>
+					<%=p.get('texto')%>
+				</p>
+				<p>
+					<%=p.get('texto_obj')%>:
+				</p>
+				<ul class="circle">
+					<% for(i=0;i<p.get('obj').length;i++){%>
+						<li><p><%=p.get('obj')[i]%></p></li>
+					<%}%>
+				</ul>
+			<%});%>
+		</div>
+	</div>
+</div>

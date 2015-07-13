@@ -1,0 +1,18 @@
+<div class="lateral-menu">
+	<div class="row">
+		<div class="twelve columns">
+			<h3><%=tipo%></h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="twelve columns inner-menu">
+			<%_.each(anio, function(a){%>
+			<a href="#/<%=tipo%>/<%=a.get('anio')%>">
+				<div class="panel">
+					<%=tipo%> <%=a.get('anio')%>
+				</div>
+			</a>
+			<%});%>
+		</div>
+	</div>
+</div>
