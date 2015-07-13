@@ -12,7 +12,7 @@ function Buscar_Personal($id){
     //generamos la consulta
 
 
-    $sql  = "SELECT * FROM pesonal WHERE filtro=$filtro";
+    $sql  = "SELECT * FROM pesonal WHERE filtro=$filtro ORDER BY apellido ASC";
     
    mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
 
