@@ -161,8 +161,14 @@ define([
                             cache: false,
                             contentType: false,
                             processData: false,
+                            beforeSend: function(){
+                                message = $("<span class='before'>Subiendo la imagen, por favor espere...</span>");
+                                $(".modal").show();
+                                $(".modal .mensaje").html(message);        
+                            },
                             //una vez finalizado correctamente
                             success: function(datos){
+                                $(".modal").hide();
                                 $('.done').fadeIn('slow');
                             }
                         });
