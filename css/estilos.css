@@ -476,10 +476,6 @@ select {
     border-radius: 4px;
 }
 
-.subir_personal.btn {
-    margin-bottom: 30px;
-    float: right;
-}
 .messages{
     font-family: sans-serif;
     display: none;

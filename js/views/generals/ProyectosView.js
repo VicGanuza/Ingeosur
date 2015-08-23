@@ -33,7 +33,8 @@ define([
                             participantes: dataJson[i].participantes,
                             desde: dataJson[i].desde,
                             hasta: dataJson[i].hasta,
-                            tipo: dataJson[i].tipo
+                            tipo: dataJson[i].tipo,
+                            especialidad: dataJson[i].especialidad
                         });
 
                         total.push(dato);

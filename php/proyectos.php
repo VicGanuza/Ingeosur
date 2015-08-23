@@ -40,7 +40,8 @@ function Buscar_Proyectos($year){
                              'participantes' => $row['participantes'],
                              'tipo' => $row['tipo'],
                              'desde' => $desdeConv,
-                             'hasta' => $hastaConv
+                             'hasta' => $hastaConv,
+                             'especialidad' => $row['especialidad']
                              );
         $i++;
     }

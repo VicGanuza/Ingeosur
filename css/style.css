@@ -2,7 +2,7 @@
 /* Global Reset & Standards ---------------------- */
 * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 html { font-size: 62.5% }
-body { font-family: DroidSansRegular, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-size: 13px; line-height: 20px; color: #666; position: relative; -webkit-font-smoothing: antialiased; }
+body { font-family: DroidSansRegular, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-size: 13px; line-height: 20px; color: #666; position: relative; -webkit-font-smoothing: antialiased; padding-bottom: 300px !important;}
 /* Links ---------------------- */
 a { color: #2ba6cb; text-decoration: none; line-height: inherit; }
 a:hover { color: #2795b6 }
@@ -103,7 +103,7 @@ select { width: 100% }
 fieldset { border: solid 1px #ddd; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; padding: 12px 12px 0; margin: 18px 0; }
 fieldset legend { font-weight: bold; background: white; padding: 0 3px; margin: 0; margin-left: -3px; }
 /* Errors */
-.error input,input.error,.error textarea,textarea.error { border-color: #c60f13; background-color: rgba(198, 15, 19, 0.1); }
+.error input,input.error,.error textarea,textarea.error, select.error { border-color: #c60f13; background-color: rgba(198, 15, 19, 0.1); }
 .error label,label.error { color: #c60f13 }
 .error small,small.error { display: block; padding: 6px 4px; margin-top: -13px; margin-bottom: 12px; background: #c60f13; color: #fff; font-size: 12px; font-size: 1.2rem; font-weight: bold; -moz-border-radius-bottomleft: 2px; -webkit-border-bottom-left-radius: 2px; border-bottom-left-radius: 2px; -moz-border-radius-bottomright: 2px; -webkit-border-bottom-right-radius: 2px; border-bottom-right-radius: 2px; }
 
@@ -799,7 +799,7 @@ a:focus { outline: none }
 #testimonials blockquote {  font-family: Georgia, "Times New Roman", Times, serif; font-style: italic; color: #808080; display: block; }
 #testimonials blockquote p { margin: 0 !important; padding: 5px!important; }
 #testimonials blockquote cite { font-style: normal; display: block; text-transform: uppercase; font-weight: bold; font-style: italic; padding-left: 5px; margin-top: 10px; }
-#footer { background: #151515; color: #666; padding: 30px 0; margin-top: 36px; }
+#footer { background: #151515; color: #666; padding: 30px 0; margin-top: 36px; position: fixed; bottom: 0; right: 0; left: 0;}
 #footer a { color: #666; font-size: 12px; }
 #footer h1 { font-size: 16px; color: #ccc; margin-bottom: 20px; }
 .newsmargin { margin-left: 46px }

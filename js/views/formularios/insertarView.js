@@ -2,7 +2,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/formulariosTemplate.html'
+  'text!templates/formularios/formulariosTemplate.html'
 ], function($, _, Backbone, formTemplate){
 
     var InsertarView = Backbone.View.extend({
