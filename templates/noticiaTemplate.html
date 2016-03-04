@@ -1,0 +1,24 @@
+<div class="row">
+	<div class="twelve columns">
+		<%_.each(noticia, function(t){%>
+			<h3><%=t.get('titulo')%></h3>
+			<h5><%=t.get('fecha')%></h5>
+			<hr/>
+			<div class="row">
+				<div class="twelve columns">
+					<%if ((t.get('imagen')==null) || (t.get('imagen')=="")) {%>
+						<img class="imagen_noti" src="images/noticias/no-image.png">
+					<%}
+					else {%>
+						<img class="imagen_noti" src="images/noticias/<%= t.get('imagen')%>">
+					<%}%>
+				</div>
+			</div>
+			<div class="row">
+				<div class="twelve columns">
+					<p><%=t.get('cuerpo')%></p>
+				</div>
+			</div>
+		<%});%>
+	</div>
+</div>

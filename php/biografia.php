@@ -27,7 +27,8 @@ function Biografia_Personal($id){
         $nombre = $row['apellido']." ".$row['nombre'];
 
         $rawdata[$i] = array('Id' => $row['id'],
-                            'Nombre' => $nombre,
+                            'Nombre' => $row['nombre'],
+                            "Apellido" => $row['apellido'],
                             'Titulo' => $row['titulo'],
                             'Cargo' => $row['cargo'],
                             'Adicional' => $row['adicional'],

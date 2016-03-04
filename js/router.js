@@ -12,11 +12,16 @@ define([
     'views/generals/ArticulosView',
     'views/generals/ProyectosView',
     'views/generals/LaboratoriosView',
+    'views/generals/NoticiaView',
     'views/formularios/formularioView',
-    'views/formularios/insertarView'
+    'views/formularios/insertarView',
+    'views/formularios/editarView',
+    'views/formularios/editPersonalView',
+    'views/formularios/editArticuloView'
 
 ], function($, _, Backbone, HomeView, ContactoView, GeneralView, BioView, InvesView,
-            InvesSinMenuView, ArticView, ProyView, LaboratoriosView, FormView, InsertarView) {
+            InvesSinMenuView, ArticView, ProyView, LaboratoriosView, NoticiaView, 
+            FormView, InsertarView, EditarView, EditPersonalView, EditArticuloView) {
   
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -41,8 +46,13 @@ define([
             'servicios' : 'showServicios',
             'palinologia' : 'showPalinologia',
             'petrotomia' : 'showPetrotomia',
+            'noticia/:id': "showNoticia",
             'formulario' : 'showForm',
             'insertar' : 'showInsertar',
+            'insertTab' : 'showInsertar',
+            'editTab' : 'showEditar',
+            'edit_personal/:id': 'showEditPersonal',
+            'edit_articulo/:id': 'showEditArticulo',
             // Default
             '*actions': 'defaultAction'
         }
@@ -213,6 +223,14 @@ define([
 
         });
 
+        app_router.on('route:showNoticia', function(id){
+
+            // Call render on the module we loaded in via the dependency array
+            var notiView = new NoticiaView();
+            notiView.render(id);
+
+        });
+
         app_router.on('route:showForm', function(){
 
             // Call render on the module we loaded in via the dependency array
@@ -226,6 +244,30 @@ define([
             // Call render on the module we loaded in via the dependency array
             var InsView = new InsertarView();
             InsView.render();
+
+        });
+
+        app_router.on('route:showEditar', function(){
+
+            // Call render on the module we loaded in via the dependency array
+            var EditView = new EditarView();
+            EditView.render();
+
+        });
+
+        app_router.on('route:showEditPersonal', function(id){
+
+            // Call render on the module we loaded in via the dependency array
+            var EditPerView = new EditPersonalView();
+            EditPerView.render(id);
+
+        });
+
+        app_router.on('route:showEditArticulo', function(id){
+
+            // Call render on the module we loaded in via the dependency array
+            var EditArtView = new EditArticuloView();
+            EditArtView.render(id);
 
         });
 

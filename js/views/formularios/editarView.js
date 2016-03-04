@@ -1,81 +1,186 @@
 define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'views/footer/FooterView',
-  'text!templates/formularios/formulariosTemplate.html',
-  'text!templates/formularios/InsertSuccessTemplate.html'
-], function($, _, Backbone, FooterView, formTemplate, successTemplate){
+    'jquery',
+    'underscore',
+    'backbone',
+    'views/footer/FooterView',
+    'models/personal/PersonalModel',
+    'collections/PersonalCollection',
+    'text!templates/formularios/formulariosTemplate.html',
+    'text!templates/formularios/personalEdit.html',
+    'text!templates/formularios/articulosEdit.html',
 
-    var FormularioView = Backbone.View.extend({
+], function($, _, Backbone, FooterView, PersonalModel, PersonalCollection, formTemplate, personalEditTemplate,
+            articulosEdit){
+
+    var EditarView = Backbone.View.extend({
         el: $("#page"),
+        personal: $("#personal_list"),
         that: this,
         events : {
-          "click .subir_personal": "subirPersonal",
-          "click .close": "cerrarMensaje",
-          "change #archivo_img": "cambiar_nombreImg",
-          "change #archivo_img_noti": "cambiar_nombreImg_noti",
-          "change #archivo_pdf": "cambiar_nombrePdf",
-          "change #archivo_img_gral": "cambiar_nombreImg_gral",
-          "change #opcionesInsertar": "cambiar_form",
-          "click .subir_articulo": "subirArticulo",
-          "click .subir_proyecto": "subirProyecto",
-          "click .subir_noticias": "subirNoticias",
-          "click .subir_imagenes": "subirImagenes"
+            "change #opcionesEditar": "cambiar_form",
+            "change #tipo_personal_edit": "mostrarListaPersonal",
+            "change #tipo_articulo_edit": "mostrarListaArticulo",
+            "change #archivo_img_edit": "cambiar_nombreImg",
+            "change #archivo_pdf_edit": "cambiar_nombrePdf",
+            "click .subir_personal_editado": "subirPersonal"
         },
 
         render: function(){
+            
             var compiledTemplate = _.template(formTemplate);
             this.$el.html(compiledTemplate);
 
-            var footerView = new FooterView();
-            footerView.render();
+           /* var footerView = new FooterView();
+            footerView.render();*/
 
-            $("#insertTab").css("display","block");
-            $("#insertTab").addClass("active");
-            $("#insertar").addClass("active");
-            $('#editTab').css('display' , 'none');
-            $("#editTab").removeClass("active");
-            $("#editar").removeClass("active");
-        },
-
-        limpiar_personal: function(){
-            alert("limpiar_personal");
+            $("#insertTab").css("display","none");
+            $("#insertTab").removeClass("active");
+            $("#insertar").removeClass("active");
+            $('#editTab').css('display' , 'block');
+            $("#editTab").addClass("active");
+            $("#editar").addClass("active");
         },
 
         cambiar_form: function(){
-            var valor = $('select[name=opcionesInsertar]');
+            var valor = $('select[name=opcionesEditar]');
             $(".inner-form").css("display","none");
 
             if (valor.val() == 1) {
-                $("#add-personal").css("display","block");
+                $("#edit-personal").css("display","block");
             }
             if (valor.val() == 2) {
-                $("#add-articulo").css("display","block");
+                $("#edit-articulo").css("display","block");
             }
             if (valor.val() == 3) {
-                $("#add-proyectos").css("display","block");
+                $("#edit-proyectos").css("display","block");
             }
             if (valor.val() == 4) {
-                $("#add-noticias").css("display","block");
+                $("#edit-noticias").css("display","block");
             }
             if (valor.val() == 5) {
-                $("#add-imagenes").css("display","block");
+                $("#edit-imagenes").css("display","block");
             }
         }, 
 
+        mostrarListaPersonal: function(){
+            var temp = this.$("#personal_list");
+            var tipo=$('select[name=tipo_personal_edit]').val();
+
+            parametros = {
+                id: tipo
+            }
+
+            var total=[];
+
+            $.ajax({
+                data: parametros, 
+                url:   'php/personal.php',
+                type:  'post',
+                success:  function (response) {
+
+                    var dataJson = eval(response);
+
+                    for(var i in dataJson){
+                        var dato = new PersonalModel({
+                            id: dataJson[i].Id,
+                            nombre: dataJson[i].Nombre,
+                            titulo: dataJson[i].Titulo,
+                            cargo: dataJson[i].Cargo,
+                            adicional: dataJson[i].Adicional,
+                            imagen: dataJson[i].Imagen
+                        });
+
+                        total.push(dato);
+                    }
+                    var data = {
+                            personal: total,
+                            _: _ 
+                        };
+
+                    var compiledTemplate = _.template(personalEditTemplate, data);
+                    temp.html(compiledTemplate);
+                }
+            }); 
+        },
+        
+        cambiar_nombreImg: function(){
+            $('#uploadImg_edit').val($("#archivo_img_edit")[0].files[0].name);
+        },
+
+        cambiar_nombreImg_noti: function(){
+            $('#uploadImg_noti').val($("#archivo_img_noti")[0].files[0].name);
+        },
+
+        cambiar_nombreImg_gral: function(){
+            $('#uploadImg_gral').val($("#archivo_img_gral")[0].files[0].name);
+        },
+
+        cambiar_nombrePdf: function(){
+            $('#uploadPdf_edit').val($("#archivo_pdf_edit")[0].files[0].name);
+        },
+
+        showMessageImg: function(message){
+            $(".messageImg").html("").show();
+            $(".messageImg").html(message);
+        },
+
+        showMessagePdf: function(message){
+            $(".messagePdf").html("").show();
+            $(".messagePdf").html(message);
+        },
+
+        isImage: function(extension) {
+            switch(extension.toLowerCase()) 
+            {
+                case 'jpg': case 'gif': case 'png': case 'jpeg':
+                    return true;
+                break;
+                default:
+                    return false;
+                break;
+            }
+        },
+
+        isPdf: function(extension) {
+            switch(extension.toLowerCase()) 
+            {
+                case 'pdf': 
+                    return true;
+                break;
+                default:
+                    return false;
+                break;
+            }
+        },
+
+        cerrarMensaje: function(){
+            $('.done').fadeOut('slow'); 
+        },
+
+        cleanForm: function(frm){
+            var inputs = document.frm.getElementsByTagName("input");
+            var select = document.frm.getElementsByTagName("select");
+            for(var i=0;i<inputs.length;i++){
+                inputs[i].value = "";
+            }
+            for(var i=0;i<inputs.length;i++){
+                select[i].value = "0";
+            }
+        },
+        
         subirPersonal: function(){
-            var name = $('input[name=nombre_personal]');
-            var apellido = $('input[name=apellido_personal]');
-            var titulo = $('input[name=titulo_personal]');
-            var cargo = $('input[name=cargo_personal]');
-            var especialidad = $('textarea[name=especialidad_personal]');
-            var specialty = $('textarea[name=specialty_personal]');
+            var id= $('#id_hidden').val();
+            var name = $('input[name=nombre_personal_edit]');
+            var apellido = $('input[name=apellido_personal_edit]');
+            var titulo = $('input[name=titulo_personal_edit]');
+            var cargo = $('input[name=cargo_personal_edit]');
+            var especialidad = $('textarea[name=especialidad_personal_edit]');
+            var specialty = $('textarea[name=specialty_personal_edit]');
             var email = $('input[name=email_personal]');
-            var foto = $("#archivo_img")[0].files[0];
-            var cv = $("#archivo_pdf")[0].files[0];
-            var filtro = $('select[name=tipo_personal]');
-            var adicionales = $('input[name=adicional_personal]');
+            var foto = $("#archivo_img_edit")[0].files[0];
+            var cv = $("#archivo_pdf_edit")[0].files[0];
+            var filtro = $('select[name=tipo_personal_edit]');
+            var adicionales = $('input[name=adicional_personal_edit]');
             var returnError = false;
             var hay_img = false;
             var hay_pdf = false;
@@ -139,28 +244,38 @@ define([
             if (hay_img) {
                 extension = foto_value.substring(foto_value.lastIndexOf('.') + 1);
                 if (this.isImage(extension)!=true) {
-                    $('#uploadImg').addClass('error');
+                    $('#uploadImg_edit').addClass('error');
                     message = $("<span class='error_mng'>El archivo debe ser jpg, jpeg, png o gif.</span>");
                     this.showMessageImg(message);
                     returnError = true;
                 }
                 else {
                     $(".messageImg").hide();
-                    $('#uploadImg').removeClass('error');
+                    $('#uploadImg_edit').removeClass('error');
+                }
+            }
+            else {
+                if ($('#uploadImg_edit').val()!=''){
+                    foto_value = $('#uploadImg_edit').val();
                 }
             }
 
             if (hay_pdf) {
                 extension = cv_value.substring(cv_value.lastIndexOf('.') + 1);
                 if (this.isPdf(extension)!=true) {
-                    $('#uploadPdf').addClass('error');
+                    $('#uploadPdf_edit').addClass('error');
                     message = $("<span class='error_mng'>El archivo debe ser Pdf.</span>");
                     this.showMessagePdf(message);
                     returnError = true;
                 }
                 else {
                     $(".messagePdf").hide();
-                    $('#uploadPdf').removeClass('error');
+                    $('#uploadPdf_edit').removeClass('error');
+                }
+            }
+            else {
+                if ($('#uploadPdf_edit').val()!=''){
+                    cv_value = $('#uploadPdf_edit').val();
                 }
             }
 
@@ -169,6 +284,7 @@ define([
             }
 
             parametros = {
+                id: id,
                 name : name.val(),
                 apellido : apellido.val(),
                 titulo : titulo.val(),
@@ -184,11 +300,11 @@ define([
 
             $.ajax({
                 data: parametros, 
-                url: 'php/formularios/insertar_personal.php',
+                url: 'php/formularios/actualizar_personal.php',
                 type:  'POST',
                 success: function (response) {
                     if (hay_img || hay_pdf) {
-                        var archivos = new FormData($(".datos")[0]);
+                        var archivos = new FormData($(".datos_edit")[0]);
 
                         $.ajax({
                             url: 'php/upload.php',  
@@ -214,12 +330,13 @@ define([
                                 titulo.val('');
                                 cargo.val('');
                                 especialidad.val('');
-                                $('textarea[name=specialty_personal]').val('');
-                                $('input[name=email_personal]').val('');
-                                $('#uploadImg').val('');
-                                $('#uploadPdf').val('');
-                                $('select[name=tipo_personal]').val('0');
-                                $('input[name=adicional_personal]').val('');      
+                                $('textarea[name=specialty_personal_edit]').val('');
+                                $('input[name=email_personal_edit]').val('');
+                                $('#uploadImg_edit').val('');
+                                $('#uploadPdf_edit').val('');
+                                $('select[name=tipo_personal_edit]').val('0');
+                                $('input[name=adicional_personal_edit]').val('');   
+                                $('#edit-personal').css('display','none');
                             }                      
                         });
                     }
@@ -230,82 +347,57 @@ define([
                         titulo.val('');
                         cargo.val('');
                         especialidad.val('');
-                        $('textarea[name=specialty_personal]').val('');
-                        $('input[name=email_personal]').val('');
-                        $('#uploadImg').val('');
-                        $('#uploadPdf').val('');
-                        $('select[name=tipo_personal]').val('0');
-                        $('input[name=adicional_personal]').val('');     
+                        $('textarea[name=specialty_personal_edit]').val('');
+                        $('input[name=email_personal_edit]').val('');
+                        $('#uploadImg_edit').val('');
+                        $('#uploadPdf_edit').val('');
+                        $('select[name=tipo_personal_edit]').val('0');
+                        $('input[name=adicional_personal_edit]').val('');    
+                        $('#edit-personal').css('display','none'); 
                     }
                 }
             });
         },
 
-        cambiar_nombreImg: function(){
-            $('#uploadImg').val($("#archivo_img")[0].files[0].name);
-        },
+        mostrarListaArticulo: function(){
+            var temp = this.$("#articulo_list");
+            var tipo=$('select[name=tipo_articulo_edit]').val();
 
-        cambiar_nombreImg_noti: function(){
-            $('#uploadImg_noti').val($("#archivo_img_noti")[0].files[0].name);
-        },
-
-        cambiar_nombreImg_gral: function(){
-            $('#uploadImg_gral').val($("#archivo_img_gral")[0].files[0].name);
-        },
-
-        cambiar_nombrePdf: function(){
-            $('#uploadPdf').val($("#archivo_pdf")[0].files[0].name);
-        },
-
-        showMessageImg: function(message){
-            $(".messageImg").html("").show();
-            $(".messageImg").html(message);
-        },
-
-        showMessagePdf: function(message){
-            $(".messagePdf").html("").show();
-            $(".messagePdf").html(message);
-        },
-
-        isImage: function(extension)
-        {
-            switch(extension.toLowerCase()) 
-            {
-                case 'jpg': case 'gif': case 'png': case 'jpeg':
-                    return true;
-                break;
-                default:
-                    return false;
-                break;
+            parametros = {
+                id: tipo
             }
-        },
 
-        isPdf: function(extension)
-        {
-            switch(extension.toLowerCase()) 
-            {
-                case 'pdf': 
-                    return true;
-                break;
-                default:
-                    return false;
-                break;
-            }
-        },
+            var total=[];
 
-        cerrarMensaje: function(){
-            $('.done').fadeOut('slow'); 
-        },
+            $.ajax({
+                data: parametros, 
+                url:   'php/articulo_bytype.php',
+                type:  'post',
+                success:  function (response) {
 
-        cleanForm: function(frm){
-            var inputs = document.frm.getElementsByTagName("input");
-            var select = document.frm.getElementsByTagName("select");
-            for(var i=0;i<inputs.length;i++){
-                inputs[i].value = "";
-            }
-            for(var i=0;i<inputs.length;i++){
-                select[i].value = "0";
-            }
+                    var dataJson = eval(response);
+
+                    for(var i in dataJson){
+                        var dato = new PersonalModel({
+                            id: dataJson[i].id,
+                            autores: dataJson[i].autores,
+                            titulo: dataJson[i].titulo,
+                            lugar: dataJson[i].lugar,
+                            anio: dataJson[i].anio,
+                            tipo: dataJson[i].tipo
+                        });
+
+                        total.push(dato);
+                    }
+                    var data = {
+                            articulo: total,
+                            _: _ 
+                        };
+
+                    var compiledTemplate = _.template(articulosEdit, data);
+                    temp.html(compiledTemplate);
+                }
+            }); 
         },
 
         subirArticulo: function(){
@@ -539,7 +631,7 @@ define([
             
             var returnError = false;
 
-            if (lugar.val()=='0') {
+            if (lugar.val()=='') {
                 lugar.addClass('error');
                 returnError = true;
             } else lugar.removeClass('error');  
@@ -689,5 +781,5 @@ define([
         }
     });
 
-    return FormularioView;
+    return EditarView;
 });

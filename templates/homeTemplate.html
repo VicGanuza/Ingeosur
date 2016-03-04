@@ -19,91 +19,22 @@
 	<div class="twelve columns">
 		<div id="ei-slider" class="ei-slider">
 			<ul class="ei-slider-large">
-				<li>
-					<img src="../final/images/inicio/slider-2.png" alt="Slider" class="responsiveslide">
-				</li>
-				<li>
-					<img src="../final/images/inicio/Landsat.png" alt="Landsat" class="responsiveslide">
-				</li>
-				<li>
-					<img src="../final/images/inicio/disyuncion-columnar.png" alt="Disyuncion Columnar" class="responsiveslide">
-				</li>
+				<% _.each(imagenes, function(f){%>
+					<li><img src="<%=f.get('url')%>/<%=f.get('nombre')%>" alt="Slider" class="responsiveslide"></li>
+				<%});%>
 			</ul>
 			<!-- slider-thumbs -->
 			<ul class="ei-slider-thumbs">
 				<li class="ei-slider-element">Current</li>
-				<li><a href="#">Slide 1</a><img src="../final/images/inicio/slider-2.png" alt="image01" class="responsiveslide" class="slideshowthumb" alt="Slider"/></li>
-				<li><a href="#">Slide 2</a><img src="../final/images/inicio/Landsat.png" class="slideshowthumb" alt="Landsat"/></li>
-				<li><a href="#">Slide 3</a><img src="../final/images/inicio/disyuncion-columnar.png" class="slideshowthumb" alt="Disyuncion Columnar"/></li>
+				<% _.each(imagenes, function(f){%>
+					<li><a href="#"><%=f.get('nombre')%></a><img src="<%=f.get('url')%>/<%=f.get('nombre')%>" alt="Slider" class="responsiveslide" class="slideshowthumb" alt="<%=f.get('nombre')%>"></li>
+				<%});%>
 			</ul>
 		</div>
 	</div>
 </div>
 
 <div class="minipause"></div>
-
-<div class="hr"></div>
-
-<div class="row">
-    <div class="twelve columns">
-    <div class="centersectiontitle">
-		<h4>Noticias</h4>
-	</div>
-      <!-- Empieza el contenedor mayor -->
-    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; height: 300px; background: #000; overflow: hidden; ">
-
-        <!-- Loading Screen -->
-        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
-            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
-                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
-            </div>
-            <div style="position: absolute; display: block; background: url(../template-mod/img/loading.gif) no-repeat center center;
-                top: 0px; left: 0px;width: 100%;height:100%;">
-            </div>
-        </div>
-
-        <!-- Slides Container -->
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 300px; overflow: hidden;">
-            <%_.each(noticias, function(n){
-				if(n.get('imagen')==null) {%>
-					<div>
-					<img u="image" src="images/no-image.png" />
-				<%} else {%>
-					<div>
-					<img u="image" alt="<%=n.get('titulo')%>" title="<%=n.get('titulo')%>" src="images/noticias/<%=n.get('imagen')%>">
-				<%}%>
-				<div class="info">
-					<a href="#/noticia/<%=n.get('id')%>">
-						<div class="volanta"><%=n.get('fecha')%></div>
-						<h2><%=n.get('titulo')%></h2>
-						<div class="vermas">ver +</div>
-						<div class="slide-desc">
-							<p><%=n.get('desc')%></p>
-						</div>
-					</a>
-				</div>
-				<div u="thumb">
-                    <div class="t"><%=n.get('titulo')%></div>
-                    <div class="c"><%=n.get('desc')%></div>
-                </div>
-    		</div>
-           <%});%>
-        </div>
-        
-        <div u="thumbnavigator" class="jssort11" style="left: 604px; top:0px;">
-                <!-- Thumbnail Item Skin Begin -->
-                <div u="slides" style="cursor: default;">
-                    <div u="prototype" class="p" style="top: 0; left: 0;">
-                        <div u="thumbnailtemplate" class="tp"></div>
-                    </div>
-                </div>
-                <!-- Thumbnail Item Skin End -->
-            </div>
-        <a style="display: none" href="http://www.jssor.com">Image Slider</a>
-    </div>
-    </div>
-  </div>
-</div>
 <div class="hr"></div>
 <div class="row">
 	<div class="twelve columns">
@@ -112,17 +43,73 @@
 		</div>
 	</div>
 	<div class="twelve columns">
-		<p>
-			El <b>Instituto Geológico del Sur (INGEOSUR)</b> es una Unidad Ejecutora (UE) dependiente del Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET) y de la Universidad Nacional del Sur (UNS).
-		</p>
-		<p>
-			Fue creado en Octubre de 1994 como un instituto dependiente de la UNS, por iniciativa de los grupos de investigación del Departamento de Geología y en Diciembre de 2006 fue incorporado al CONICET como una Unidad Ejecutora de doble dependencia.
-		</p>
-		<p>
-			El <b>INGEOSUR</b> tiene su sede física en el edificio del Departamento de Geología de la UNS, ubicado en la calle San Juan Nro. 670 de la ciudad de Bahía Blanca (B8000ICN), Argentina. Tel: 54 (291) 4595101 int. 3033, Fax: (291) 4595148. Email: ingeosur@ingeosur-conicet.gob.ar
-		</p>
+		<%=quienes%>
 	</div>
 </div>
+
+<div class="hr"></div>
+<%if (noticias.length>0){%>
+	<div class="row">
+	    <div class="twelve columns">
+	    <div class="centersectiontitle">
+			<h4>Noticias</h4>
+		</div>
+	      <!-- Empieza el contenedor mayor -->
+	    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; height: 300px; background: #000; overflow: hidden; ">
+
+	        <!-- Loading Screen -->
+	        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+	            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+	                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+	            </div>
+	            <div style="position: absolute; display: block; background: url(../template-mod/img/loading.gif) no-repeat center center;
+	                top: 0px; left: 0px;width: 100%;height:100%;">
+	            </div>
+	        </div>
+
+	        <!-- Slides Container -->
+	        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 300px; overflow: hidden;">
+	            <%_.each(noticias, function(n){
+					if(n.get('imagen')==null) {%>
+						<div>
+						<img u="image" src="images/no-image.png" />
+					<%} else {%>
+						<div>
+						<img u="image" alt="<%=n.get('titulo')%>" title="<%=n.get('titulo')%>" src="images/noticias/<%=n.get('imagen')%>">
+					<%}%>
+					<div class="info">
+						<a href="#/noticia/<%=n.get('id')%>">
+							<div class="volanta"><%=n.get('fecha')%></div>
+							<h2><%=n.get('titulo')%></h2>
+							<div class="vermas">ver +</div>
+							<div class="slide-desc">
+								<p><%=n.get('desc')%></p>
+							</div>
+						</a>
+					</div>
+					<div u="thumb">
+	                    <div class="t"><%=n.get('titulo')%></div>
+	                    <div class="c"><%=n.get('desc')%></div>
+	                </div>
+	    		</div>
+	           <%});%>
+	        </div>
+	        
+	        <div u="thumbnavigator" class="jssort11" style="left: 604px; top:0px;">
+	                <!-- Thumbnail Item Skin Begin -->
+	                <div u="slides" style="cursor: default;">
+	                    <div u="prototype" class="p" style="top: 0; left: 0;">
+	                        <div u="thumbnailtemplate" class="tp"></div>
+	                    </div>
+	                </div>
+	                <!-- Thumbnail Item Skin End -->
+	            </div>
+	        <a style="display: none" href="http://www.jssor.com">Image Slider</a>
+	    </div>
+	    </div>
+	  </div>
+	</div>
+<%}%>
 
 <div class="hr"></div>
 <script src="js/home.js"></script>

@@ -1,0 +1,333 @@
+<div>
+<div class="row">
+	<!-- CONTACT FORM -->
+	<div class="twelve columns">
+		<div class="wrapcontact">
+			<div class="done">
+				<div class="alert-box success">
+				 El mensaje ha sido enviado! <div class="close">x</div>
+				</div>
+			</div>		
+			<dl class="tabs">
+				<dd id="insertar" class="active"><a href="#insertTab">Insertar</a></dd>
+				<dd id="editar"><a href="#editTab">Editar</a></dd>
+				<dd id="eliminar"><a href="#simple3">Eliminar</a></dd>
+			</dl>	
+			<ul class="tabs-content">
+				<li class="active" id="insertTab">
+					<form enctype="multipart/form-data" class="datos">
+						<div class="form">
+							<div class="row">
+								<div class="six columns">
+									<label>Elige una opción:</label>
+									<select class="smoothborder" id="opcionesInsertar" name="opcionesInsertar">
+										<option value="1">Personal</option>
+										<option value="2">Articulos</option>
+										<option value="3">Proyectos</option>
+										<option value="4">Noticias</option>
+										<option value="5">Imagenes</option>
+									</select>
+								</div>
+							</div>
+							<!-- Insertar Personal -->
+							<div id="add-personal" class="inner-form">
+								<div class="row">
+									<div class="six columns">
+										<label>Tipo:</label>
+										<select class="smoothborder" name="tipo_personal">
+											<option value="0">Seleccionar</option>
+											<option value="investigadores-conicet">Investigadores CONICET</option>
+											<option value="investigadores-cic">Investigadores CIC</option>
+											<option value="investigadores-uns">Investigadores UNS</option>
+											<option value="becarios-conicet">Becarios CONICET</option>
+											<option value="profesionales-apoyo">Profesionales de Apoyo CONICET</option>
+										</select>
+										<label>Nombre completo</label>
+										<input type="text" name="nombre_personal" class="smoothborder">
+										<label>Apellido</label>
+										<input type="text" name="apellido_personal" class="smoothborder">
+										<label>Titulo</label>
+										<input type="text" name="titulo_personal" class="smoothborder">
+										<label>Cargo</label>
+										<input type="text" name="cargo_personal" class="smoothborder">
+										<label>Cargos Adicionales</label>
+										<input type="text" name="adicional_personal" class="smoothborder">
+									</div>
+								</div>
+								<div class="row">
+									<div class="six columns">
+										<label>Especialidad</label>
+										<textarea class="smoothborder" name="especialidad_personal" rows="10"></textarea>
+									</div>
+									<div class="six columns">
+										<label>Specialty</label>
+										<textarea class="smoothborder" name="specialty_personal" rows="10"></textarea>
+									</div>
+								</div>
+								<div class="row">
+									<div class="six columns">
+										<label>Email</label>
+										<input type="text" name="email_personal" class="smoothborder">
+										<label>Subir imagen:</label>
+										<input id="uploadImg" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+										<div class="fileUpload btn btn-primary">
+										    <span>Upload</span>
+										    <input id="archivo_img" name="archivo_img" type="file" class="uploadBtn upload"/>
+										</div>
+										<div class="messages messageImg"></div>
+										<label>Subir CV</label>
+										<input id="uploadPdf" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+										<div class="fileUpload btn btn-primary">
+										    <span>Upload</span>
+										    <input id="archivo_pdf" name="archivo_pdf" type="file" class="uploadBtn upload"/>
+										</div>
+										<div class="messages messagePdf"><span class="error">Debe ser un pdf</span></div>
+									</div>
+								</div>
+								<input type="button" class="btn btn-primary subir_personal" value="Subir">
+							</div>
+							<!-- Insertar Articulos -->
+							<div id="add-articulo" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Tipo:</label>
+										<select class="smoothborder" name="tipo">
+											<option value="0">Seleccionar</option>
+											<option value="1">Articulos</option>
+											<option value="2">Trabajo en eventos C-T Publicados</option>
+											<option value="3">Partes del libro</option>
+											<option value="4">Libros</option>
+										</select>
+										<label>Autores</label>
+										<input type="text" name="autores" class="smoothborder">
+										<label>Título</label>
+										<input type="text" name="titulo" class="smoothborder">
+										<label>Lugar de publicación</label>
+										<input type="text" name="lugar" class="smoothborder">
+										<label>Año</label>
+										<input type="text" name="anio" class="smoothborder">
+									</div>
+								</div>
+								<input type="button" class="btn btn-primary subir_articulo" value="Subir">
+							</div>
+							<!-- Insertar Proyectos -->
+							<div id="add-proyectos" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Título</label>
+										<input type="text" name="tituloProy" class="smoothborder">
+										<label>Tipo:</label>
+										<input type="text" name="tipo" class="smoothborder">
+										<label>Participantes</label>
+										<input type="text" name="participantes" class="smoothborder">
+										<div class="row">
+											<div class="six columns">
+												<label>Desde</label>
+												<input type="date" name="desde">
+											</div>
+											<div class="six columns">
+												<label>Hasta</label>
+												<input type="date" name="hasta">
+											</div>
+										</div>
+										<label>Claves</label>
+										<input type="text" name="claves" class="smoothborder">
+										<label>Especialidad</label>
+										<input type="text" name="especialidad" class="smoothborder">
+									</div>
+								</div>
+								<input type="button" class="btn btn-primary subir_proyecto" value="Subir">
+							</div>
+							<!-- Insertar Noticias -->
+							<div id="add-noticias" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Titulo:</label>
+										<input type="text" name="tituloNoti" class="smoothborder">
+										<label>Cuerpo</label>
+										<textarea class="smoothborder" name="cuerpo" rows="20"></textarea>
+										<label>Fecha</label>
+										<input type="date" name="fecha">
+									</div>
+								</div>
+								<div class="row">
+									<div class="six columns">
+										<label>Subir imagen:</label>
+										<input id="uploadImg_noti" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+										<div class="fileUpload btn btn-primary">
+										    <span>Upload</span>
+										    <input id="archivo_img_noti" name="archivo_img_noti" type="file" class="uploadBtn upload"/>
+										</div>
+										<div class="messages messageImg"></div>
+									</div>
+								</div>
+								<input type="button" class="btn btn-primary subir_noticias" value="Subir">
+							</div>
+							<!-- Insertar Imágenes -->
+							<div id="add-imagenes" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Sección:</label>
+										<select class="smoothborder" name="lugarImg">
+											<option value="0">Seleccionar</option>
+											<option value="1">Inicio</option>
+											<option value="2">Laboratorio Palinología</option>
+											<option value="3">Laboratorio Petrotomía</option>
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="six columns">
+										<label>Subir imagen:</label>
+										<input id="uploadImg_gral" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+										<div class="fileUpload btn btn-primary">
+										    <span>Upload</span>
+										    <input id="archivo_img_gral" name="archivo_img_gral" type="file" class="uploadBtn upload"/>
+										</div>
+										<div class="messages messageImg"></div>
+									</div>
+								</div>
+								<input type="button" class="btn btn-primary subir_imagenes" value="Subir">
+							</div>
+						</div>
+					</form>	
+				</li>
+				<li class="active" id="editTab" style="display:none;">
+					<form enctype="multipart/form-data" class="datos_edit">
+						<div class="form">
+							<div class="row">
+								<div class="six columns">
+									<label>Elige una opción:</label>
+									<select class="smoothborder" id="opcionesEditar" name="opcionesEditar">
+										<option value="1">Personal</option>
+										<option value="2">Articulos</option>
+										<option value="3">Proyectos</option>
+										<option value="4">Noticias</option>
+										<option value="5">Imagenes</option>
+									</select>
+								</div>
+							</div>
+							<!-- Insertar Personal -->
+							<div id="edit-personal" class="inner-form">
+								<div class="row">
+									<div class="six columns">
+										<label>Tipo:</label>
+										<select class="smoothborder" id="tipo_personal_edit" name="tipo_personal_edit">
+											<option value="0">Seleccionar</option>
+											<option value="investigadores-conicet">Investigadores CONICET</option>
+											<option value="investigadores-cic">Investigadores CIC</option>
+											<option value="investigadores-uns">Investigadores UNS</option>
+											<option value="becarios-conicet">Becarios CONICET</option>
+											<option value="profesionales-apoyo">Profesionales de Apoyo CONICET</option>
+										</select>
+									</div>
+								</div>
+								<div id="personal_list" class="row"></div>
+							</div>
+							<!-- Insertar Articulos -->
+							<div id="edit-articulo" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Tipo:</label>
+										<select class="smoothborder" id="tipo_articulo_edit" name="tipo_articulo_edit">
+											<option value="0">Seleccionar</option>
+											<option value="1">Articulos</option>
+											<option value="2">Trabajo en eventos C-T Publicados</option>
+											<option value="3">Partes del libro</option>
+											<option value="4">Libros</option>
+										</select>
+										
+									</div>
+								</div>
+								<div id="articulo_list" class="row"></div>
+							</div>
+							<!-- Insertar Proyectos -->
+							<div id="edit-proyectos" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Título</label>
+										<input type="text" name="tituloProy" class="smoothborder">
+										<label>Tipo:</label>
+										<input type="text" name="tipo" class="smoothborder">
+										<label>Participantes</label>
+										<input type="text" name="participantes" class="smoothborder">
+										<div class="row">
+											<div class="six columns">
+												<label>Desde</label>
+												<input type="date" name="desde">
+											</div>
+											<div class="six columns">
+												<label>Hasta</label>
+												<input type="date" name="hasta">
+											</div>
+										</div>
+										<label>Claves</label>
+										<input type="text" name="claves" class="smoothborder">
+										<label>Especialidad</label>
+										<input type="text" name="especialidad" class="smoothborder">
+									</div>
+								</div>
+								<input type="button" class="btn btn-primary subir_proyecto" value="Subir">
+							</div>
+							<!-- Insertar Noticias -->
+							<div id="edit-noticias" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Titulo:</label>
+										<input type="text" name="tituloNoti" class="smoothborder">
+										<label>Cuerpo</label>
+										<textarea class="smoothborder" name="cuerpo" rows="20"></textarea>
+										<label>Fecha</label>
+										<input type="date" name="fecha">
+									</div>
+								</div>
+								<div class="row">
+									<div class="six columns">
+										<label>Subir imagen:</label>
+										<input id="uploadImg_noti" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+										<div class="fileUpload btn btn-primary">
+										    <span>Upload</span>
+										    <input id="archivo_img_noti" name="archivo_img_noti" type="file" class="uploadBtn upload"/>
+										</div>
+										<div class="messages messageImg"></div>
+									</div>
+								</div>
+								<input type="button" class="btn btn-primary subir_noticias" value="Subir">
+							</div>
+							<!-- Insertar Imágenes -->
+							<div id="edit-imagenes" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Sección:</label>
+										<select class="smoothborder" name="lugarImg">
+											<option value="0">Seleccionar</option>
+											<option value="1">Inicio</option>
+											<option value="2">Laboratorio Palinología</option>
+											<option value="3">Laboratorio Petrotomía</option>
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="six columns">
+										<label>Subir imagen:</label>
+										<input id="uploadImg_gral" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+										<div class="fileUpload btn btn-primary">
+										    <span>Upload</span>
+										    <input id="archivo_img_gral" name="archivo_img_gral" type="file" class="uploadBtn upload"/>
+										</div>
+										<div class="messages messageImg"></div>
+									</div>
+								</div>
+								<input type="button" class="btn btn-primary subir_imagenes" value="Subir">
+							</div>
+						</div>
+					</form>	
+				</li>
+			</ul>
+		</div>
+	</div>
+												
+</div>
+<div class="hr">
+</div>
+</div>

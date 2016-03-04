@@ -15,12 +15,12 @@ define([
                 var title="";
                 if (id=='Proyectos'){
                     title = "Proyectos de Investigación";
-                    texto = "<p>Los proyectos son llevados a cabo por un investigador o grupo de investigación, financiados por el CONICET, MINCyT, Universidades y organismos públicos o privados tanto nacionales comodel exterior. Algunos de estos proyectos se desarrollanen el marco de convenios de cooperación internacional con financiamiento bilateral.</p><p>Desde la creación del <strong>Instituto Geológico del Sur,</strong> sus miembros han participado en más de 300 proyectos de investigación.</p>";
+                    texto = "<p>Los proyectos son llevados a cabo por un investigador o grupo de investigación, financiados por el CONICET, MINCyT, Universidades y organismos públicos o privados tanto nacionales comodel exterior. Algunos de estos proyectos se desarrollan en el marco de convenios de cooperación internacional con financiamiento bilateral.</p><p>Desde la creación del <strong>Instituto Geológico del Sur,</strong> sus miembros han participado en más de 300 proyectos de investigación.</p>";
                 }
                 else {
                     if (id=='Articulos'){
                         title ="Producción Científico Tecnológica";
-                        texto = "bla bla bla";
+                        texto = "Producción Científica de los Investigadores del Instituto Geológico del Sur";
                     }
                     else{
                         title ="Líneas de invetigación"

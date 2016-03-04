@@ -1,0 +1,48 @@
+<div id="editar-personal" class="inner-form">
+	<div class="row">
+		<input type="text" id="id_hidden" style="visibility: hidden;">
+		<div class="six columns">
+			<label>Nombre completo</label>
+			<input type="text" name="nombre_personal_edit" class="smoothborder">
+			<label>Apellido</label>
+			<input type="text" name="apellido_personal_edit" class="smoothborder">
+			<label>Titulo</label>
+			<input type="text" name="titulo_personal_edit" class="smoothborder">
+			<label>Cargo</label>
+			<input type="text" name="cargo_personal_edit" class="smoothborder">
+			<label>Cargos Adicionales</label>
+			<input type="text" name="adicional_personal_edit" class="smoothborder">
+		</div>
+	</div>
+	<div class="row">
+		<div class="six columns">
+			<label>Especialidad</label>
+			<textarea class="smoothborder" name="especialidad_personal_edit" rows="10"></textarea>
+		</div>
+		<div class="six columns">
+			<label>Specialty</label>
+			<textarea class="smoothborder" name="specialty_personal_edit" rows="10"></textarea>
+		</div>
+	</div>
+	<div class="row">
+		<div class="six columns">
+			<label>Email</label>
+			<input type="text" name="email_personal_edit" class="smoothborder">
+			<label>Subir imagen:</label>
+			<input id="uploadImg_edit" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+			<div class="fileUpload btn btn-primary">
+			    <span>Upload</span>
+			    <input id="archivo_img_edit" name="archivo_img_edit" type="file" class="uploadBtn upload"/>
+			</div>
+			<div class="messages messageImg"></div>
+			<label>Subir CV</label>
+			<input id="uploadPdf_edit" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+			<div class="fileUpload btn btn-primary">
+			    <span>Upload</span>
+			    <input id="archivo_pdf_edit" name="archivo_pdf_edit" type="file" class="uploadBtn upload"/>
+			</div>
+			<div class="messages messagePdf"></div>
+		</div>
+	</div>
+	<input type="button" class="btn btn-primary subir_personal_editado" value="Subir">
+</div>

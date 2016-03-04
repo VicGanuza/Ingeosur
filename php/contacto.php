@@ -7,7 +7,7 @@ $content = $_POST['coment'];
 
 function Enviar_mail($name, $from, $content) {
 
-	$para = "victoriaganuza@gmail.com";
+	$para = "ingeosur@ingeosur-conicet.gob.ar";
 	$de = "Consulta desde Web!";
 
 	$headers = 'From: '. $from ."\r\n" .

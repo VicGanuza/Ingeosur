@@ -30,6 +30,7 @@ define([
                     for(var i in dataJson){
                         var dato = new PersonalModel({
                             nombre: dataJson[i].Nombre,
+                            apellido: dataJson[i].Apellido,
                             titulo: dataJson[i].Titulo,
                             cargo: dataJson[i].Cargo,
                             adicional: dataJson[i].Adicional,

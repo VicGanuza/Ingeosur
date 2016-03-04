@@ -24,7 +24,7 @@ div.alert-box.default { background-color: #55a2a6;}
 .slide {	margin: 0;	padding: 0;	border-top: solid 4px #55a2a6;}
 .btn-slide {	background:#55a2a6 url(../../images/plus.png) no-repeat;}
 .btn-slide.active { background: #55a2a6 url(../../images/minus.png) no-repeat;}
-#footer {border-top:#55a2a6 4px solid;}
+#footer {border-top:#55a2a6 4px solid;z-index: 10}
 .back-top a:hover{background-color: #55a2a6;}
 .sf-shadow ul {border-top:2px solid #55a2a6;}
 .panel {border-left:4px solid #55a2a6;}

@@ -3,11 +3,17 @@
 //comprobamos que sea una petición ajax
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') 
 {
-//var_dump($_FILES);
+    //var_dump($_FILES);
     //obtenemos el archivo a subir
-   $file_image = $_FILES['archivo_img']['name']; 
-    $file_pdf = $_FILES['archivo_pdf']['name'];
- 
+   
+    if ($_FILES['archivo_img']['name'] != '') {
+        $file_image = $_FILES['archivo_img']['name']; 
+        $file_pdf = $_FILES['archivo_pdf']['name'];
+    } else {
+        $file_image = $_FILES['archivo_img_edit']['name']; 
+        $file_pdf = $_FILES['archivo_pdf_edit']['name'];
+    }
+  
     
     //comprobamos si existe un directorio para subir el archivo
     //si no es así, lo creamos
@@ -24,6 +30,19 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     }
 
     if ($file_pdf && move_uploaded_file($_FILES['archivo_pdf']['tmp_name'],"../pdf/".$file_pdf))
+    {
+       sleep(3);//retrasamos la petición 3 segundos
+       echo $file_pdf;//devolvemos el nombre del archivo para pintar la imagen
+    }
+
+    //comprobamos si el archivo ha subido
+    if ($file_image && move_uploaded_file($_FILES['archivo_img_edit']['tmp_name'],"../images/perfil/".$file_image))
+    {
+       sleep(3);//retrasamos la petición 3 segundos
+       echo $file_image;//devolvemos el nombre del archivo para pintar la imagen
+    }
+
+    if ($file_pdf && move_uploaded_file($_FILES['archivo_pdf_edit']['tmp_name'],"../pdf/".$file_pdf))
     {
        sleep(3);//retrasamos la petición 3 segundos
        echo $file_pdf;//devolvemos el nombre del archivo para pintar la imagen
