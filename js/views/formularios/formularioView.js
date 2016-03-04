@@ -184,7 +184,7 @@ define([
 
             $.ajax({
                 data: parametros, 
-                url: 'php/formularios/insertar_personal.php',
+                url: 'php/insertar_personal.php',
                 type:  'POST',
                 success: function (response) {
                     if (hay_img || hay_pdf) {
@@ -359,7 +359,7 @@ define([
 
             $.ajax({
                 data: parametros, 
-                url: 'php/formularios/insertar_articulos.php',
+                url: 'php/insertar_articulos.php',
                 type:  'POST',
                 success: function (response) {
                     $('.done').fadeIn('slow'); 
@@ -413,13 +413,13 @@ define([
                 participantes : participantes.val(),
                 desde : desde.val(),
                 hasta : hasta.val(),
-                especialidad : especialidad.val(),
-                claves: claves.val()
+                claves: claves.val(),
+                especialidad: especialidad.val()
             }
 
             $.ajax({
                 data: parametros, 
-                url: 'php/formularios/insertar_proyectos.php',
+                url: 'php/insertar_proyectos.php',
                 type:  'POST',
                 success: function (response) {
                     $('.done').fadeIn('slow');    
@@ -427,9 +427,10 @@ define([
                     titulo.val('');
                     participantes.val('');
                     desde.val('');
-                    especialidad.val('');
                     hasta.val('');
-                    claves.val('');     
+                    hasta.val('');
+                    claves.val('');  
+                    especialidad.val('');  
                 }
             });
         },
@@ -493,7 +494,7 @@ define([
 
             $.ajax({
                 data: parametros, 
-                url: 'php/formularios/insertar_noticias.php',
+                url: 'php/insertar_noticias.php',
                 type:  'POST',
                 success: function (response) {
                     if (hay_img) {
@@ -581,7 +582,7 @@ define([
 
                 $.ajax({
                     data: parametros, 
-                    url: 'php/formularios/insertar_img_ini.php',
+                    url: 'php/insertar_img_ini.php',
                     type:  'POST',
                     success: function (response) {
                         var archivos = new FormData($(".datos")[0]);
@@ -620,7 +621,7 @@ define([
 
                 $.ajax({
                     data: parametros, 
-                    url: 'php/formularios/insertar_img_lab.php',
+                    url: 'php/insertar_img_lab.php',
                     type:  'POST',
                     success: function (response) {
                         var archivos = new FormData($(".datos")[0]);
@@ -659,7 +660,7 @@ define([
 
                 $.ajax({
                     data: parametros, 
-                    url: 'php/formularios/insertar_img_lab.php',
+                    url: 'php/insertar_img_lab.php',
                     type:  'POST',
                     success: function (response) {
                         var archivos = new FormData($(".datos")[0]);

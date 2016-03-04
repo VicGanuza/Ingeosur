@@ -62,7 +62,7 @@
 	            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
 	                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
 	            </div>
-	            <div style="position: absolute; display: block; background: url(../template-mod/img/loading.gif) no-repeat center center;
+	            <div style="position: absolute; display: block; background: url(../final/images/loading.gif) no-repeat center center;
 	                top: 0px; left: 0px;width: 100%;height:100%;">
 	            </div>
 	        </div>
@@ -70,7 +70,7 @@
 	        <!-- Slides Container -->
 	        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 300px; overflow: hidden;">
 	            <%_.each(noticias, function(n){
-					if(n.get('imagen')==null) {%>
+					if(n.get('imagen')==null || (n.get('imagen')=="")) {%>
 						<div>
 						<img u="image" src="images/no-image.png" />
 					<%} else {%>

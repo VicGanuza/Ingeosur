@@ -1,6 +1,6 @@
 <?php
 
-require 'conexion.php';
+require '..\conexion.php';
 
 $name =  $_POST['name'];
 $apellido =  $_POST['apellido'];
