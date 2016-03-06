@@ -22,7 +22,8 @@ define([
             "change #tipo_articulo_edit": "mostrarListaArticulo",
             "change #archivo_img_edit": "cambiar_nombreImg",
             "change #archivo_pdf_edit": "cambiar_nombrePdf",
-            "click .subir_personal_editado": "subirPersonal"
+            "click .subir_personal_editado": "subirPersonal",
+            "click .subir_articulo_editado": "subirArticulo"
         },
 
         render: function(){
@@ -401,15 +402,13 @@ define([
         },
 
         subirArticulo: function(){
-            var autores = $('input[name=autores]');
-            var titulo = $('input[name=titulo]');
-            var lugar = $('input[name=lugar]');
-            var anio = $('input[name=anio]');
-            var tipo = $('select[name=tipo]');
+            var id= $('#id_hidden_art').val();
+            var autores = $('input[name=autores_articulo_edit]');
+            var titulo = $('input[name=titulo_articulo_edit]');
+            var lugar = $('input[name=lugar_articulo_edit]');
+            var anio = $('input[name=anio_articulo_edit]');
             
             var returnError = false;
-            var hay_img = false;
-            var hay_pdf = false;
             var temp = this.$el;
 
             if (autores.val()=='') {
@@ -432,26 +431,21 @@ define([
                 returnError = true;
             } else anio.removeClass('error');  
 
-            if (tipo.val()=='0') {
-                tipo.addClass('error');
-                returnError = true;
-            } else tipo.removeClass('error');  
-
             if(returnError == true){
                 return false;   
             }
 
             parametros = {
+                id: id,
                 autores : autores.val(),
                 titulo : titulo.val(),
                 lugar : lugar.val(),
                 anio : anio.val(),
-                tipo : tipo.val(),
             }
 
             $.ajax({
                 data: parametros, 
-                url: 'php/formularios/insertar_articulos.php',
+                url: 'php/formularios/actualizar_articulo.php',
                 type:  'POST',
                 success: function (response) {
                     $('.done').fadeIn('slow'); 
