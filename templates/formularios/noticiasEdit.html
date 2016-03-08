@@ -1,0 +1,20 @@
+<div class="content">
+	<%_.each(noticias, function(n){%>
+	<div class="row">
+		<hr>
+		<div class="two columns">
+			<%if((n.get('imagen')==null) || (n.get('imagen')=="")){%>
+				<img src="images/no-image.png">
+			<%}
+			else {%>
+				<img src="images/noticias/<%=n.get('imagen')%>">
+			<%}%>
+		</div>
+		<a href="#/edit_noticia/<%=n.get('id')%>" class="ten columns">
+			<h6><%= n.get('titulo') %></h6>
+	 		<div><%= n.get('fecha')%></div>
+	 		<div><%= n.get('desc')%></div>
+	 	</a>
+	</div>
+	<%});%>
+</div>

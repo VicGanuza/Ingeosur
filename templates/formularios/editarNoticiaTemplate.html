@@ -1,0 +1,25 @@
+<div id="editar-noticia" class="inner-form">
+	<div class="row">
+		<input type="text" id="id_hidden_not" style="visibility: hidden;">
+		<div class="six columns">
+			<label>Titulo:</label>
+			<input type="text" name="titulo_noticia_edit" class="smoothborder">
+			<label>Cuerpo</label>
+			<textarea class="smoothborder" name="cuerpo_noticia_edit" rows="20"></textarea>
+			<label>Fecha</label>
+			<input type="date" name="fecha_noticia_edit">
+		</div>
+	</div>
+	<div class="row">
+		<div class="six columns">
+			<label>Subir imagen:</label>
+			<input id="uploadImg_noticia_edit" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
+			<div class="fileUpload btn btn-primary">
+			    <span>Upload</span>
+			    <input id="archivo_noticia_edit" name="archivo_noticia_edit" type="file" class="uploadBtn upload"/>
+			</div>
+			<div class="messages messageImg"></div>
+		</div>
+	</div>
+	<input type="button" class="btn btn-primary subir_noticia_editada" value="Subir">
+</div>

@@ -18,11 +18,12 @@ define([
     'views/formularios/editarView',
     'views/formularios/editPersonalView',
     'views/formularios/editArticuloView',
-    'views/formularios/editProyectoView'
+    'views/formularios/editProyectoView',
+    'views/formularios/editNoticiaView'
 
 ], function($, _, Backbone, HomeView, ContactoView, GeneralView, BioView, InvesView,
             InvesSinMenuView, ArticView, ProyView, LaboratoriosView, NoticiaView, 
-            FormView, InsertarView, EditarView, EditPersonalView, EditArticuloView, EditProyectoView) {
+            FormView, InsertarView, EditarView, EditPersonalView, EditArticuloView, EditProyectoView, EditNoticiaView) {
   
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -55,6 +56,7 @@ define([
             'edit_personal/:id': 'showEditPersonal',
             'edit_articulo/:id': 'showEditArticulo',
             'edit_proyecto/:id': 'showEditProyecto',
+            'edit_noticia/:id': 'showEditNoticia',
             // Default
             '*actions': 'defaultAction'
         }
@@ -280,6 +282,15 @@ define([
             EditProView.render(id);
 
         });
+
+        app_router.on('route:showEditNoticia', function(id){
+
+            // Call render on the module we loaded in via the dependency array
+            var EditNotView = new EditNoticiaView();
+            EditNotView.render(id);
+
+        });
+
         app_router.on('route:defaultAction', function(){
        
             // Call render on the module we loaded in via the dependency array

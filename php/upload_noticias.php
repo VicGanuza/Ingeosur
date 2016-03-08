@@ -5,7 +5,11 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 {
     var_dump($_FILES);
     //obtenemos el archivo a subir
-    $file_image = $_FILES['archivo_img_noti']['name']; 
+    if ($_FILES['archivo_img_noti']['name'] != '') {
+        $file_image = $_FILES['archivo_img_noti']['name']; 
+    } else {
+        $file_image = $_FILES['archivo_noticia_edit']['name']; 
+    }
 
     echo $file_image;
     
@@ -16,6 +20,12 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
      
     //comprobamos si el archivo ha subido
     if ($file_image && move_uploaded_file($_FILES['archivo_img_noti']['tmp_name'],"../images/noticias/".$file_image))
+    {
+       sleep(3);//retrasamos la petición 3 segundos
+       echo $file_image;//devolvemos el nombre del archivo para pintar la imagen
+    }
+
+    if ($file_image && move_uploaded_file($_FILES['archivo_noticia_edit']['tmp_name'],"../images/noticias/".$file_image))
     {
        sleep(3);//retrasamos la petición 3 segundos
        echo $file_image;//devolvemos el nombre del archivo para pintar la imagen

@@ -21,7 +21,8 @@ function Buscar_Noticia($id){
 
     while($row = @mysqli_fetch_array($result))
     {
-        $rawdata[$i] = array('titulo' => $row['titulo'],
+        $rawdata[$i] = array('id' => $row['id'],
+                             'titulo' => $row['titulo'],
                              'cuerpo' => $row['cuerpo'],
                              'fecha' => $row['fecha'],
                              'imagen' => $row['imagen']

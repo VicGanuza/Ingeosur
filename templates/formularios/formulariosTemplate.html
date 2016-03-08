@@ -203,11 +203,10 @@
 										<option value="2">Articulos</option>
 										<option value="3">Proyectos</option>
 										<option value="4">Noticias</option>
-										<option value="5">Imagenes</option>
 									</select>
 								</div>
 							</div>
-							<!-- Insertar Personal -->
+							<!-- Editar Personal -->
 							<div id="edit-personal" class="inner-form">
 								<div class="row">
 									<div class="six columns">
@@ -224,7 +223,7 @@
 								</div>
 								<div id="personal_list" class="row"></div>
 							</div>
-							<!-- Insertar Articulos -->
+							<!-- Editar Articulos -->
 							<div id="edit-articulo" class="inner-form" style="display:none;">
 								<div class="row">
 									<div class="six columns">
@@ -241,60 +240,13 @@
 								</div>
 								<div id="articulo_list" class="row"></div>
 							</div>
-							<!-- Insertar Proyectos -->
+							<!-- Editar Proyectos -->
 							<div id="edit-proyectos" class="inner-form" style="display:none;">
 								<div id="proyectos_list" class="row"></div>
 							</div>
-							<!-- Insertar Noticias -->
+							<!-- Editar Noticias -->
 							<div id="edit-noticias" class="inner-form" style="display:none;">
-								<div class="row">
-									<div class="six columns">
-										<label>Titulo:</label>
-										<input type="text" name="tituloNoti" class="smoothborder">
-										<label>Cuerpo</label>
-										<textarea class="smoothborder" name="cuerpo" rows="20"></textarea>
-										<label>Fecha</label>
-										<input type="date" name="fecha">
-									</div>
-								</div>
-								<div class="row">
-									<div class="six columns">
-										<label>Subir imagen:</label>
-										<input id="uploadImg_noti" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
-										<div class="fileUpload btn btn-primary">
-										    <span>Upload</span>
-										    <input id="archivo_img_noti" name="archivo_img_noti" type="file" class="uploadBtn upload"/>
-										</div>
-										<div class="messages messageImg"></div>
-									</div>
-								</div>
-								<input type="button" class="btn btn-primary subir_noticias" value="Subir">
-							</div>
-							<!-- Insertar Imágenes -->
-							<div id="edit-imagenes" class="inner-form" style="display:none;">
-								<div class="row">
-									<div class="six columns">
-										<label>Sección:</label>
-										<select class="smoothborder" name="lugarImg">
-											<option value="0">Seleccionar</option>
-											<option value="1">Inicio</option>
-											<option value="2">Laboratorio Palinología</option>
-											<option value="3">Laboratorio Petrotomía</option>
-										</select>
-									</div>
-								</div>
-								<div class="row">
-									<div class="six columns">
-										<label>Subir imagen:</label>
-										<input id="uploadImg_gral" placeholder="Choose File" disabled="disabled" class="uploadFile"/>
-										<div class="fileUpload btn btn-primary">
-										    <span>Upload</span>
-										    <input id="archivo_img_gral" name="archivo_img_gral" type="file" class="uploadBtn upload"/>
-										</div>
-										<div class="messages messageImg"></div>
-									</div>
-								</div>
-								<input type="button" class="btn btn-primary subir_imagenes" value="Subir">
+								<div id="noticias_list" class="row"></div>
 							</div>
 						</div>
 					</form>	

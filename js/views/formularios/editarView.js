@@ -9,9 +9,10 @@ define([
     'text!templates/formularios/personalEdit.html',
     'text!templates/formularios/articulosEdit.html',
     'text!templates/formularios/proyectosEdit.html',
+    'text!templates/formularios/noticiasEdit.html',
 
 ], function($, _, Backbone, FooterView, PersonalModel, PersonalCollection, formTemplate, personalEditTemplate,
-            articulosEdit,proyectosEdit){
+            articulosEdit,proyectosEditTemplate,noticiaEditTemplate){
 
     var EditarView = Backbone.View.extend({
         el: $("#page"),
@@ -25,7 +26,9 @@ define([
             "change #archivo_pdf_edit": "cambiar_nombrePdf",
             "click .subir_personal_editado": "subirPersonal",
             "click .subir_articulo_editado": "subirArticulo",
-            "click .subir_proyecto_editado": "subirProyecto"
+            "click .subir_proyecto_editado": "subirProyecto",
+            "click .subir_noticia_editada": "subirNoticia",
+            "change #archivo_noticia_edit": "cambiar_nombreImg_noti"
         },
 
         render: function(){
@@ -89,14 +92,53 @@ define([
                                 _: _ 
                             };
 
-                        var compiledTemplate = _.template(proyectosEdit, data);
+                        var compiledTemplate = _.template(proyectosEditTemplate, data);
                         temp.html(compiledTemplate);
                         $("#edit-proyectos").css("display","block");
                     }
                 }); 
             }
             if (valor.val() == 4) {
-                $("#edit-noticias").css("display","block");
+                var temp = this.$("#noticias_list");
+                var total = [];
+
+                $.ajax({
+                    url:   'php/noticias.php',
+                    success:  function (response) {
+
+                        var dataJson = eval(response);
+
+                        for(var i in dataJson){
+                            cuerpo = dataJson[i].cuerpo;
+                            maxLength = 300;
+                            ret = cuerpo;
+
+                            if (ret.length > maxLength) {
+                                ret = ret.substr(0,maxLength-3) + "...";
+                            }
+
+                            var dato = new PersonalModel({
+                                id: dataJson[i].id,
+                                titulo: dataJson[i].titulo,
+                                desc: ret,
+                                fecha: dataJson[i].fecha,
+                                imagen: dataJson[i].imagen
+                            });
+
+                            total.push(dato);
+                        }
+
+                        var data = {
+                            noticias: total, 
+                            _: _ 
+                        };
+
+                        var compiledTemplate = _.template(noticiaEditTemplate, data);
+                        temp.html(compiledTemplate);
+                        $("#edit-noticias").css("display","block");
+                    }
+                });
+                    
             }
             if (valor.val() == 5) {
                 $("#edit-imagenes").css("display","block");
@@ -149,11 +191,7 @@ define([
         },
 
         cambiar_nombreImg_noti: function(){
-            $('#uploadImg_noti').val($("#archivo_img_noti")[0].files[0].name);
-        },
-
-        cambiar_nombreImg_gral: function(){
-            $('#uploadImg_gral').val($("#archivo_img_gral")[0].files[0].name);
+            $('#uploadImg_noticia_edit').val($("#archivo_noticia_edit")[0].files[0].name);
         },
 
         cambiar_nombrePdf: function(){
@@ -194,21 +232,6 @@ define([
             }
         },
 
-        cerrarMensaje: function(){
-            $('.done').fadeOut('slow'); 
-        },
-
-        cleanForm: function(frm){
-            var inputs = document.frm.getElementsByTagName("input");
-            var select = document.frm.getElementsByTagName("select");
-            for(var i=0;i<inputs.length;i++){
-                inputs[i].value = "";
-            }
-            for(var i=0;i<inputs.length;i++){
-                select[i].value = "0";
-            }
-        },
-        
         subirPersonal: function(){
             var id= $('#id_hidden').val();
             var name = $('input[name=nombre_personal_edit]');
@@ -562,11 +585,12 @@ define([
             });
         },
 
-        subirNoticias: function(){
-            var titulo = $('input[name=tituloNoti]');
-            var cuerpo = $('textarea[name=cuerpo]');
-            var fecha = $('input[name=fecha]');
-            var img = $("#archivo_img_noti")[0].files[0];
+        subirNoticia: function(){
+            var id= $('#id_hidden_not').val();
+            var titulo = $('input[name=titulo_noticia_edit]');
+            var cuerpo = $('textarea[name=cuerpo_noticia_edit]');
+            var fecha = $('input[name=fecha_noticia_edit]');
+            var img = $("#archivo_noticia_edit")[0].files[0];
             var hay_img = false;
             
             var returnError = false;
@@ -597,14 +621,19 @@ define([
             if (hay_img) {
                 extension = img_value.substring(img_value.lastIndexOf('.') + 1);
                 if (this.isImage(extension)!=true) {
-                    $('#uploadImg_noti').addClass('error');
+                    $('#uploadImg_noticia_edit').addClass('error');
                     message = $("<span class='error_mng'>El archivo debe ser jpg, jpeg, png o gif.</span>");
                     this.showMessageImg(message);
                     returnError = true;
                 }
                 else {
                     $(".messageImg").hide();
-                    $('#uploadImg_noti').removeClass('error');
+                    $('#uploadImg_noticia_edit').removeClass('error');
+                }
+            }
+            else {
+                if ($('#uploadImg_noticia_edit').val()!=''){
+                    img_value = $('#uploadImg_noticia_edit').val();
                 }
             }
 
@@ -613,6 +642,7 @@ define([
             }
 
             parametros = {
+                id: id,
                 titulo : titulo.val(),
                 cuerpo : cuerpo.val(),
                 fecha : fecha.val(),
@@ -621,11 +651,11 @@ define([
 
             $.ajax({
                 data: parametros, 
-                url: 'php/formularios/insertar_noticias.php',
+                url: 'php/formularios/actualizar_noticia.php',
                 type:  'POST',
                 success: function (response) {
                     if (hay_img) {
-                        var archivos = new FormData($(".datos")[0]);
+                        var archivos = new FormData($(".datos_edit")[0]);
 
                         $.ajax({
                             url: 'php/upload_noticias.php',  
@@ -645,7 +675,7 @@ define([
                                 titulo.val('');
                                 cuerpo.val('');
                                 fecha.val('');
-                                $("#uploadImg_noti").val('');     
+                                $("#uploadImg_noticia_edit").val('');     
                             }
                         });
                     }
@@ -654,166 +684,10 @@ define([
                         titulo.val('');
                         cuerpo.val('');
                         fecha.val('');
-                        $("#uploadImg_noti").val('');  
+                        $("#uploadImg_noticia_edit").val('');  
                     }     
                 }
             }); 
-        },
-
-        subirImagenes: function(){
-            var lugar = $('select[name=lugarImg]');
-            var img = $("#archivo_img_gral")[0].files[0];
-            var hay_img = false;
-            
-            var returnError = false;
-
-            if (lugar.val()=='') {
-                lugar.addClass('error');
-                returnError = true;
-            } else lugar.removeClass('error');  
-
-            if (img == undefined) {
-                img_value = null;
-                $("#uploadImg_gral").addClass('error');
-                returnError = true;
-            } else {
-                img_value = img.name;
-                hay_img = true;
-            }
-
-            if (hay_img) {
-                extension = img_value.substring(img_value.lastIndexOf('.') + 1);
-                if (this.isImage(extension)!=true) {
-                    $('#uploadImg_gral').addClass('error');
-                    message = $("<span class='error_mng'>El archivo debe ser jpg, jpeg, png o gif.</span>");
-                    this.showMessageImg(message);
-                    returnError = true;
-                }
-                else {
-                    $(".messageImg").hide();
-                    $('#uploadImg_gral').removeClass('error');
-                }
-            }
-
-            if(returnError == true){
-                return false;   
-            }
-
-            if (lugar.val()==1) {
-                var url = "images/inicio";
-
-                parametros = {
-                    img : img_value,
-                    url: url
-                }
-
-                $.ajax({
-                    data: parametros, 
-                    url: 'php/formularios/insertar_img_ini.php',
-                    type:  'POST',
-                    success: function (response) {
-                        var archivos = new FormData($(".datos")[0]);
-
-                        $.ajax({
-                            url: 'php/upload_img_ini.php',  
-                            type: 'POST',
-                            data: archivos,
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function(){
-                                message = $("<span class='before'>Subiendo la imagen, por favor espere...</span>");
-                                $(".modal").show();
-                                $(".modal .mensaje").html(message);        
-                            },
-                            success: function(datos){
-                                $(".modal").hide();
-                                $('.done').fadeIn('slow');
-                                $('select[name=lugarImg]').val('0');
-                                $("#uploadImg_gral").val('');
-                            }
-                        });
-                    }
-                }); 
-            }
-
-            if (lugar.val()==2) {
-                var url = "images/laboratorios/palinologia";
-
-                parametros = {
-                    lugar : lugar.val(),
-                    img : img_value,
-                    url: url
-                }
-
-                $.ajax({
-                    data: parametros, 
-                    url: 'php/formularios/insertar_img_lab.php',
-                    type:  'POST',
-                    success: function (response) {
-                        var archivos = new FormData($(".datos")[0]);
-
-                        $.ajax({
-                            url: 'php/upload_img_lab1.php',  
-                            type: 'POST',
-                            data: archivos,
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function(){
-                                message = $("<span class='before'>Subiendo la imagen, por favor espere...</span>");
-                                $(".modal").show();
-                                $(".modal .mensaje").html(message);        
-                            },
-                            success: function(datos){
-                                $(".modal").hide();
-                                $('.done').fadeIn('slow');
-                                $('select[name=lugarImg]').val('0');
-                                $("#uploadImg_gral").val('');  
-                            }
-                        });
-                    }
-                }); 
-            }
-
-            if (lugar.val()==3) {
-                var url = "images/laboratorios/petrotomia";
-
-                parametros = {
-                    lugar : lugar.val(),
-                    img : img_value,
-                    url: url
-                }
-
-                $.ajax({
-                    data: parametros, 
-                    url: 'php/formularios/insertar_img_lab.php',
-                    type:  'POST',
-                    success: function (response) {
-                        var archivos = new FormData($(".datos")[0]);
-
-                        $.ajax({
-                            url: 'php/upload_img_lab2.php',  
-                            type: 'POST',
-                            data: archivos,
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function(){
-                                message = $("<span class='before'>Subiendo la imagen, por favor espere...</span>");
-                                $(".modal").show();
-                                $(".modal .mensaje").html(message);        
-                            },
-                            success: function(datos){
-                                $(".modal").hide();
-                                $('.done').fadeIn('slow');
-                                $('select[name=lugarImg]').val('0');
-                                $("#uploadImg_gral").val('');
-                            }
-                        });
-                    }
-                }); 
-            }
         }
     });
 
