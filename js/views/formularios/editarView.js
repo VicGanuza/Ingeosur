@@ -8,9 +8,10 @@ define([
     'text!templates/formularios/formulariosTemplate.html',
     'text!templates/formularios/personalEdit.html',
     'text!templates/formularios/articulosEdit.html',
+    'text!templates/formularios/proyectosEdit.html',
 
 ], function($, _, Backbone, FooterView, PersonalModel, PersonalCollection, formTemplate, personalEditTemplate,
-            articulosEdit){
+            articulosEdit,proyectosEdit){
 
     var EditarView = Backbone.View.extend({
         el: $("#page"),
@@ -23,7 +24,8 @@ define([
             "change #archivo_img_edit": "cambiar_nombreImg",
             "change #archivo_pdf_edit": "cambiar_nombrePdf",
             "click .subir_personal_editado": "subirPersonal",
-            "click .subir_articulo_editado": "subirArticulo"
+            "click .subir_articulo_editado": "subirArticulo",
+            "click .subir_proyecto_editado": "subirProyecto"
         },
 
         render: function(){
@@ -53,7 +55,45 @@ define([
                 $("#edit-articulo").css("display","block");
             }
             if (valor.val() == 3) {
-                $("#edit-proyectos").css("display","block");
+                var temp = this.$("#proyectos_list");
+
+                parametros = {
+                    year: 0
+                }
+
+                var total=[];
+
+                $.ajax({
+                    data: parametros, 
+                    url:   'php/proyectos.php',
+                    type:  'post',
+                    success:  function (response) {
+
+                        var dataJson = eval(response);
+
+                        for(var i in dataJson){
+                            var dato = new PersonalModel({
+                                id: dataJson[i].id,
+                                titulo: dataJson[i].titulo,
+                                participantes: dataJson[i].participantes,
+                                tipo: dataJson[i].tipo,
+                                desde: dataJson[i].desde,
+                                hasta: dataJson[i].hasta,
+                                especialidad: dataJson[i].especialidad
+                            });
+
+                            total.push(dato);
+                        }
+                        var data = {
+                                proyectos: total,
+                                _: _ 
+                            };
+
+                        var compiledTemplate = _.template(proyectosEdit, data);
+                        temp.html(compiledTemplate);
+                        $("#edit-proyectos").css("display","block");
+                    }
+                }); 
             }
             if (valor.val() == 4) {
                 $("#edit-noticias").css("display","block");
@@ -459,13 +499,14 @@ define([
         },
 
         subirProyecto: function(){
-            var titulo = $('input[name=tituloProy]');
-            var tipo = $('input[name=tipo]');
-            var participantes = $('input[name=participantes]');
-            var desde = $('input[name=desde]');
-            var hasta = $('input[name=hasta]');
-            var claves = $('input[name=claves]');
-            var especialidad = $('input[name=especialidad]');
+            var id= $('#id_hidden_proy').val();
+            var titulo = $('input[name=titulo_proyecto_edit]');
+            var tipo = $('input[name=tipo_proyecto_edit]');
+            var participantes = $('input[name=participantes_proyecto_edit]');
+            var desde = $('input[name=desde_proyecto_edit]');
+            var hasta = $('input[name=hasta_proyecto_edit]');
+            var claves = $('input[name=claves_proyecto_edit]');
+            var especialidad = $('input[name=especialidad_proyecto_edit]');
             
             var returnError = false;
 
@@ -494,6 +535,7 @@ define([
             }
 
             parametros = {
+                id: id,
                 titulo : titulo.val(),
                 tipo : tipo.val(),
                 participantes : participantes.val(),
@@ -505,7 +547,7 @@ define([
 
             $.ajax({
                 data: parametros, 
-                url: 'php/formularios/insertar_proyectos.php',
+                url: 'php/formularios/actualizar_proyectos.php',
                 type:  'POST',
                 success: function (response) {
                     $('.done').fadeIn('slow');    

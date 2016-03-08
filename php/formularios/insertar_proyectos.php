@@ -10,7 +10,7 @@ $hasta = $_POST['hasta'];
 $claves = $_POST['claves'];
 $especialidad = $_POST['especialidad'];
 
-function Insertar_Personal($titulo,$tipo,$participantes,$desde,$hasta,$claves,$especialidad) {
+function Insertar_Proyecto($titulo,$tipo,$participantes,$desde,$hasta,$claves,$especialidad) {
 
 	$titulo = '"' . $titulo . '"';
 	$tipo = '"' . $tipo . '"';
@@ -30,7 +30,7 @@ function Insertar_Personal($titulo,$tipo,$participantes,$desde,$hasta,$claves,$e
     return $sql;
 }
 
-$rta = Insertar_Personal($titulo,$tipo,$participantes,$desde,$hasta,$claves,$especialidad);
+$rta = Insertar_Proyecto($titulo,$tipo,$participantes,$desde,$hasta,$claves,$especialidad);
 
 echo $rta;
 ?>
