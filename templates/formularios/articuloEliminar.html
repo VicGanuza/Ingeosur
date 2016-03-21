@@ -1,0 +1,12 @@
+<div class="content">
+	<%_.each(articulo, function(a){%>
+	<div class="row">
+		<div class="twelve columns">
+			<a href="#/remove_articulo/<%=a.get('id')%>/<%=a.get('tipo')%>" class="ten columns">
+				<p><%=a.get('autores')%> <%=a.get('titulo')%> <%=a.get('lugar')%> </p>
+			</a>
+			<hr>
+		</div>
+	</div>
+	<%});%>
+</div>

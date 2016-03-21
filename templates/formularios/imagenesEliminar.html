@@ -1,0 +1,14 @@
+<div class="grid">
+	<%_.each(imagenes, function(im){%>
+		<figure class="effect-hera">
+			<img src="<%=im.get('url')%>/<%=im.get('nombre')%>">
+			<figcaption>
+				<p>
+					<a href="#/remove_imagen/<%=im.get('id')%>/<%=im.get('tipo')%>">
+						<i class="fa fa-fw fa-trash-o"></i>
+					</a>
+				</p>
+			</figcaption>			
+		</figure>
+	<%});%>
+</div>

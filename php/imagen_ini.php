@@ -19,7 +19,8 @@ function Inicio_imagenes(){
 
     while($row = @mysqli_fetch_array($result))
     {
-        $rawdata[$i] = array('nombre' => $row['nombre'],
+        $rawdata[$i] = array('id' => $row['id'],
+                             'nombre' => $row['nombre'],
                              'url' => $row['url']
                              );
         $i++;

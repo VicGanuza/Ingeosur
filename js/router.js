@@ -19,11 +19,18 @@ define([
     'views/formularios/editPersonalView',
     'views/formularios/editArticuloView',
     'views/formularios/editProyectoView',
-    'views/formularios/editNoticiaView'
+    'views/formularios/editNoticiaView',
+    'views/formularios/eliminarView',
+    'views/formularios/eliminarPersonalView',
+    'views/formularios/eliminarArticuloView',
+    'views/formularios/eliminarProyectoView',
+    'views/formularios/eliminarNoticiaView',
+    'views/formularios/eliminarImagenView'
 
 ], function($, _, Backbone, HomeView, ContactoView, GeneralView, BioView, InvesView,
             InvesSinMenuView, ArticView, ProyView, LaboratoriosView, NoticiaView, 
-            FormView, InsertarView, EditarView, EditPersonalView, EditArticuloView, EditProyectoView, EditNoticiaView) {
+            FormView, InsertarView, EditarView, EditPersonalView, EditArticuloView, EditProyectoView, EditNoticiaView,
+            EliminarView, EliminarPersonalView, EliminarArticuloView, EliminarProyectoView,EliminarNoticiaView,EliminarImagenView) {
   
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -57,6 +64,13 @@ define([
             'edit_articulo/:id': 'showEditArticulo',
             'edit_proyecto/:id': 'showEditProyecto',
             'edit_noticia/:id': 'showEditNoticia',
+            'eliminarTab' : 'showEliminar',
+            'remove_personal/:id/:tipo': 'showRemovePersonal',
+            'remove_articulo/:id/:tipo': 'showRemoveArticulo',
+            'remove_proyecto/:id': 'showRemoveProyecto',
+            'remove_noticia/:id': 'showRemoveNoticia',
+            'remove_imagen/:id/:tipo': 'showRemoveImagen',
+
             // Default
             '*actions': 'defaultAction'
         }
@@ -288,6 +302,54 @@ define([
             // Call render on the module we loaded in via the dependency array
             var EditNotView = new EditNoticiaView();
             EditNotView.render(id);
+
+        });
+
+        app_router.on('route:showEliminar', function(){
+
+            // Call render on the module we loaded in via the dependency array
+            var ElimView = new EliminarView();
+            ElimView.render();
+
+        });
+
+        app_router.on('route:showRemovePersonal', function(id,tipo){
+
+            // Call render on the module we loaded in via the dependency array
+            var EditRemView = new EliminarPersonalView();
+            EditRemView.render(id,tipo);
+
+        });
+
+        app_router.on('route:showRemoveArticulo', function(id,tipo){
+
+            // Call render on the module we loaded in via the dependency array
+            var RemView = new EliminarArticuloView();
+            RemView.render(id,tipo);
+
+        });
+
+        app_router.on('route:showRemoveProyecto', function(id){
+
+            // Call render on the module we loaded in via the dependency array
+            var RemView = new EliminarProyectoView();
+            RemView.render(id);
+
+        });
+
+        app_router.on('route:showRemoveNoticia', function(id){
+
+            // Call render on the module we loaded in via the dependency array
+            var RemView = new EliminarNoticiaView();
+            RemView.render(id);
+
+        });
+
+        app_router.on('route:showRemoveImagen', function(id,tipo){
+
+            // Call render on the module we loaded in via the dependency array
+            var RemView = new EliminarImagenView();
+            RemView.render(id,tipo);
 
         });
 

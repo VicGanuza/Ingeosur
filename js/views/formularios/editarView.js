@@ -45,6 +45,9 @@ define([
             $('#editTab').css('display' , 'block');
             $("#editTab").addClass("active");
             $("#editar").addClass("active");
+            $("#eliminarTab").css("display","none");
+            $("#eliminarTab").removeClass("active");
+            $("#eliminar").removeClass("active");
         },
 
         cambiar_form: function(){

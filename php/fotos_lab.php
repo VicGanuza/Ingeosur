@@ -24,7 +24,8 @@ function Buscar_fotos($id){
     while($row = @mysqli_fetch_array($result))
     {   
         $rawdata[$i] = array('nombre' => $row['nombre'],
-                             'url' => $row['url']
+                             'url' => $row['url'],
+                             'id' => $row['id']
                              );
         $i++;
     }

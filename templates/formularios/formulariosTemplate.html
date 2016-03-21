@@ -11,7 +11,7 @@
 			<dl class="tabs">
 				<dd id="insertar" class="active"><a href="#insertTab">Insertar</a></dd>
 				<dd id="editar"><a href="#editTab">Editar</a></dd>
-				<dd id="eliminar"><a href="#simple3">Eliminar</a></dd>
+				<dd id="eliminar"><a href="#eliminarTab">Eliminar</a></dd>
 			</dl>	
 			<ul class="tabs-content">
 				<li class="active" id="insertTab">
@@ -247,6 +247,80 @@
 							<!-- Editar Noticias -->
 							<div id="edit-noticias" class="inner-form" style="display:none;">
 								<div id="noticias_list" class="row"></div>
+							</div>
+						</div>
+					</form>	
+				</li>
+				<li class="active" id="eliminarTab">
+					<form enctype="multipart/form-data" class="datos">
+						<div class="form">
+							<div class="row">
+								<div class="six columns">
+									<label>Elige una opción:</label>
+									<select class="smoothborder" id="opcionesEliminar" name="opcionesEliminar">
+										<option value="1">Personal</option>
+										<option value="2">Articulos</option>
+										<option value="3">Proyectos</option>
+										<option value="4">Noticias</option>
+										<option value="5">Imagenes</option>
+									</select>
+								</div>
+							</div>
+							<!-- Eliminar Personal -->
+							<div id="remove-personal" class="inner-form">
+								<div class="row">
+									<div class="six columns">
+										<label>Tipo:</label>
+										<select class="smoothborder" id="tipo_personal_remove" name="tipo_personal_remove">
+											<option value="0">Seleccionar</option>
+											<option value="investigadores-conicet">Investigadores CONICET</option>
+											<option value="investigadores-cic">Investigadores CIC</option>
+											<option value="investigadores-uns">Investigadores UNS</option>
+											<option value="becarios-conicet">Becarios CONICET</option>
+											<option value="profesionales-apoyo">Profesionales de Apoyo CONICET</option>
+										</select>
+									</div>
+								</div>
+								<div id="personal_list_remove" class="row"></div>
+							</div>
+							<!-- Eliminar Articulos -->
+							<div id="remove-articulo" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Tipo:</label>
+										<select class="smoothborder" id="tipo_articulo_remove" name="tipo_articulo_remove">
+											<option value="0">Seleccionar</option>
+											<option value="1">Articulos</option>
+											<option value="2">Trabajo en eventos C-T Publicados</option>
+											<option value="3">Partes del libro</option>
+											<option value="4">Libros</option>
+										</select>
+									</div>
+								</div>
+								<div id="articulo_list_remove" class="row"></div>
+							</div>
+							<!-- Eliminar Proyectos -->
+							<div id="remove-proyectos" class="inner-form" style="display:none;">
+								<div id="proyectos_list_remove" class="row"></div>
+							</div>
+							<!-- Eliminar Noticias -->
+							<div id="remove-noticias" class="inner-form" style="display:none;">
+								<div id="noticias_list_remove" class="row"></div>
+							</div>
+							<!-- Eliminar Imágenes -->
+							<div id="remove-imagenes" class="inner-form" style="display:none;">
+								<div class="row">
+									<div class="six columns">
+										<label>Sección:</label>
+										<select class="smoothborder" id="tipo_imagen_remove" name="tipo_imagen_remove">
+											<option value="0">Seleccionar</option>
+											<option value="1">Inicio</option>
+											<option value="2">Laboratorio Palinología</option>
+											<option value="3">Laboratorio Petrotomía</option>
+										</select>
+									</div>
+								</div>
+								<div id="imagenes_list_remove" class="row"></div>
 							</div>
 						</div>
 					</form>	
