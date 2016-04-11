@@ -4,39 +4,122 @@ define([
   'backbone',
   'views/footer/FooterView',
   'text!templates/formularios/formulariosTemplate.html',
-  'text!templates/formularios/InsertSuccessTemplate.html'
-], function($, _, Backbone, FooterView, formTemplate, successTemplate){
+  'text!templates/loginTemplate.html',
+  'text!templates/formularios/InsertSuccessTemplate.html',
+  'text!templates/homeTemplate.html',
+
+], function($, _, Backbone, FooterView, formTemplate, loginTemplate, successTemplate, homeTemplate){
 
     var FormularioView = Backbone.View.extend({
         el: $("#page"),
         that: this,
         events : {
-          "click .subir_personal": "subirPersonal",
-          "click .close": "cerrarMensaje",
-          "change #archivo_img": "cambiar_nombreImg",
-          "change #archivo_img_noti": "cambiar_nombreImg_noti",
-          "change #archivo_pdf": "cambiar_nombrePdf",
-          "change #archivo_img_gral": "cambiar_nombreImg_gral",
-          "change #opcionesInsertar": "cambiar_form",
-          "click .subir_articulo": "subirArticulo",
-          "click .subir_proyecto": "subirProyecto",
-          "click .subir_noticias": "subirNoticias",
-          "click .subir_imagenes": "subirImagenes"
+            "click .login-user": "login",
+            "click .logout-user": "logout",
+            "click .subir_personal": "subirPersonal",
+            "click .close": "cerrarMensaje",
+            "change #archivo_img": "cambiar_nombreImg",
+            "change #archivo_img_noti": "cambiar_nombreImg_noti",
+            "change #archivo_pdf": "cambiar_nombrePdf",
+            "change #archivo_img_gral": "cambiar_nombreImg_gral",
+            "change #opcionesInsertar": "cambiar_form",
+            "click .subir_articulo": "subirArticulo",
+            "click .subir_proyecto": "subirProyecto",
+            "click .subir_noticias": "subirNoticias",
+            "click .subir_imagenes": "subirImagenes"
         },
 
         render: function(){
-            var compiledTemplate = _.template(formTemplate);
-            this.$el.html(compiledTemplate);
+            $.ajax({
+                url: 'php/isLogged.php',
+                success: function (response) {
+                    if (response==0) {
+                        var compiledTemplate = _.template(loginTemplate);
+                        $("#page").html(compiledTemplate);
+                    }
+                    else {
+                        var compiledTemplate = _.template(formTemplate);
+                        $("#page").html(compiledTemplate);
+
+                        $("#insertTab").css("display","block");
+                        $("#insertTab").addClass("active");
+                        $("#insertar").addClass("active");
+                        $('#editTab').css('display' , 'none');
+                        $("#editTab").removeClass("active");
+                        $("#editar").removeClass("active");
+                        $("#eliminarTab").css("display","none");
+                        $("#eliminarTab").removeClass("active");
+                        $("#eliminar").removeClass("active");
+                    }
+                }
+            });
 
             var footerView = new FooterView();
             footerView.render();
+        },
 
-            $("#insertTab").css("display","block");
-            $("#insertTab").addClass("active");
-            $("#insertar").addClass("active");
-            $('#editTab').css('display' , 'none');
-            $("#editTab").removeClass("active");
-            $("#editar").removeClass("active");
+        login: function(){
+            var user = $('input[name=user]');
+            var password = $('input[name=password]');
+            var returnError = false;
+
+            if (user.val()=='') {
+                user.addClass('error');
+                returnError = true;
+            } else user.removeClass('error');
+            
+            if (password.val()=='') {
+                password.addClass('error');
+                returnError = true;
+            } else password.removeClass('error'); 
+
+            if(returnError == true){
+                return false;   
+            }
+
+            parametros = {
+                user : user.val(),
+                password : password.val()
+            }
+
+            $.ajax({
+                data: parametros, 
+                url: 'php/login.php',
+                type:  'POST',
+                success: function (response) {
+                    var mensaje = response;
+                    $(".modal").show();
+                    $(".modal .mensaje").html(mensaje);
+
+                    $(".ingreso_ok").click(function(){
+                        $(".modal").hide();
+                        var compiledTemplate = _.template(formTemplate);
+                        $("#page").html(compiledTemplate);
+
+                        $("#insertTab").css("display","block");
+                        $("#insertTab").addClass("active");
+                        $("#insertar").addClass("active");
+                        $('#editTab').css('display' , 'none');
+                        $("#editTab").removeClass("active");
+                        $("#editar").removeClass("active");
+                        $("#eliminarTab").css("display","none");
+                        $("#eliminarTab").removeClass("active");
+                        $("#eliminar").removeClass("active");
+                    });
+
+                    $(".ingreso_not_ok").click(function(){
+                        $(".modal").hide();
+                    });
+                }
+            });
+        },
+
+        logout: function (){
+            $.ajax({
+                url: 'php/logout.php',
+                success: function(response){
+                }
+            });
         },
 
         limpiar_personal: function(){

@@ -1,6 +1,6 @@
 <?php
 
-require '..\conexion.php';
+require 'conexion.php';
 
 $lugar =  $_POST['lugar'];
 $imagen = $_POST['img'];

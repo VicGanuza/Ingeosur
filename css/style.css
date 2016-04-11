@@ -437,7 +437,7 @@ dl.tabs.contained { margin-bottom: 0 }
 dl.tabs dt { color: #b3b3b3; cursor: default; display: block; float: left; font-size: 12px; height: 40px; line-height: 40px; padding: 0; padding-right: 9px; padding-left: 20px; width: auto; text-transform: uppercase; }
 dl.tabs dt:first-child { padding: 0; padding-right: 9px; }
 dl.tabs dd { display: block; float: left; padding: 0; margin: 0; }
-dl.tabs dd a { color: #6f6f6f; display: block; font-size: 14px; height: 40px; line-height: 40px; padding: 0px 23.8px; }
+dl.tabs dd a, dl.tabs dd div { cursor: pointer; color: #6f6f6f; display: block; font-size: 14px; height: 40px; line-height: 40px; padding: 0px 23.8px; }
 dl.tabs dd a:focus { font-weight: bold; color: #2ba6cb; }
 dl.tabs dd.active { margin-top: -3px }
 dl.tabs dd.active a { cursor: default; color: #3c3c3c; font-weight: bold; }
@@ -799,7 +799,7 @@ a:focus { outline: none }
 #testimonials blockquote {  font-family: Georgia, "Times New Roman", Times, serif; font-style: italic; color: #808080; display: block; }
 #testimonials blockquote p { margin: 0 !important; padding: 5px!important; }
 #testimonials blockquote cite { font-style: normal; display: block; text-transform: uppercase; font-weight: bold; font-style: italic; padding-left: 5px; margin-top: 10px; }
-#footer {background: #151515; color: #666; padding: 30px 0; margin-top: 36px; position: fixed; bottom: 0; right: 0; left: 0;}
+#footer {background: #151515; color: #666; padding: 30px 0; margin-top: 36px; position: absolute; bottom: 0; right: 0; left: 0;}
 #footer a { color: #666; font-size: 12px; }
 #footer h1 { font-size: 16px; color: #ccc; margin-bottom: 20px; }
 .newsmargin { margin-left: 46px }

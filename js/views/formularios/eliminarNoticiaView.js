@@ -62,7 +62,7 @@ define([
                                     total.push(dato);
                                 }
                                 var data = {
-                                        noticia: total,
+                                        noticias: total,
                                         _: _ 
                                     };
 
